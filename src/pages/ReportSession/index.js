@@ -124,11 +124,19 @@ function ReportSession() {
 
       <main className="session-main-content">
         <div className="session-container">
-                    <div className="top-nav-row">
-                        <button onClick={() => navigate(-1)} className="back-arrow-link-report" style={{background: 'none', border: 'none', cursor: 'pointer'}}>
-                            <img src={iconArrowLeft} alt="Voltar" className="back-arrow-icon" />
-                        </button>
-                    </div>
+          <div className="top-nav-row">
+            <button
+              onClick={() => navigate(-1)}
+              className="back-arrow-link-report"
+              style={{ background: "none", border: "none", cursor: "pointer" }}
+            >
+              <img
+                src={iconArrowLeft}
+                alt="Voltar"
+                className="back-arrow-icon"
+              />
+            </button>
+          </div>
 
           <div className="session-report-card">
             <h1 className="session-page-title">{sessionData.title}</h1>
@@ -171,7 +179,7 @@ function ReportSession() {
                                     return "Leitura";
                                   if (item.label === "writing")
                                     return "Escrita";
-                                  if (item.label === "Vocabulary")
+                                  if (item.label === "vocabulary")
                                     return "Vocabulário";
                                   if (item.label === "comprehension")
                                     return "Compreensão";
