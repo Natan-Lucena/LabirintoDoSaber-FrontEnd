@@ -28,7 +28,7 @@ function LoginPage() {
       password: password
     };
 
-    const API_URL = '${process.env.REACT_APP_API_BASE_URL}/educator/sign-in';
+    const API_URL = `${process.env.REACT_APP_API_BASE_URL}/educator/sign-in`;
 
     try {
       const response = await axios.post(API_URL, payload);

@@ -34,7 +34,7 @@ function AlunosPage() {
       };
 
       try {
-        const response = await axios.get('${process.env.REACT_APP_API_BASE_URL}/task-notebook/', config);
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/task-notebook/`, config);
         // O backend retorna um array de objetos { notebook: {...}, taskGroups: [...] }
         setNotebooks(response.data);
       } catch (error) {

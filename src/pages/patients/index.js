@@ -49,7 +49,7 @@ function AlunosPage() {
           headers: { Authorization: `Bearer ${token}` }
         };
 
-        const response = await axios.get('${process.env.REACT_APP_API_BASE_URL}/student/', config);
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/student/`, config);
         
         let listaCompleta = [];
         if (Array.isArray(response.data)) {

@@ -77,7 +77,7 @@ function AdicionarAtividade() {
 
         try {
             
-            const response = await axios.get('${process.env.REACT_APP_API_BASE_URL}/task-group/list-by-educator', {
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/task-group/list-by-educator`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             
@@ -150,7 +150,7 @@ function AdicionarAtividade() {
     console.log("Enviando Payload:", payload);
 
     try {
-        const response = await axios.post('${process.env.REACT_APP_API_BASE_URL}/task-notebook/create', payload, {
+        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/task-notebook/create`, payload, {
             headers: { Authorization: `Bearer ${token}` }
         });
 

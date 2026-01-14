@@ -85,8 +85,8 @@ function SessionNotebookPage() {
 
                 // Busca Cadernos e Tarefas
                 const [notebooksResponse, tasksResponse] = await Promise.all([
-                    axios.get("${process.env.REACT_APP_API_BASE_URL}/task-notebook/", config),
-                    axios.get("${process.env.REACT_APP_API_BASE_URL}/task/", config)
+                    axios.get(`${process.env.REACT_APP_API_BASE_URL}/task-notebook/`, config),
+                    axios.get(`${process.env.REACT_APP_API_BASE_URL}/task/`, config)
                 ]);
                 
                 // Mapeamento correto inspirado no seu NotebookDetailsPage
@@ -213,7 +213,7 @@ function SessionNotebookPage() {
             console.log("Iniciando sessão de CADERNO:", payload);
 
             const response = await axios.post(
-                "${process.env.REACT_APP_API_BASE_URL}/task-notebook-session/start", 
+                `${process.env.REACT_APP_API_BASE_URL}/task-notebook-session/start`, 
                 payload, 
                 config
             );

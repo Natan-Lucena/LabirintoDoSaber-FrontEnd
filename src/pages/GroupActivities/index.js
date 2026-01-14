@@ -75,7 +75,7 @@ function GroupActivitiesPage() {
         if (!token) return;
 
         try {
-            const response = await axios.get('${process.env.REACT_APP_API_BASE_URL}/task/', {
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/task/`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             
@@ -134,7 +134,7 @@ function GroupActivitiesPage() {
     console.log("Enviando Payload:", payload);
 
     try {
-        await axios.post('${process.env.REACT_APP_API_BASE_URL}/task-group/create', payload, {
+        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/task-group/create`, payload, {
             headers: { Authorization: `Bearer ${token}` }
         });
         
