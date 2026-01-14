@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import './style.css';
-import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import "./style.css";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../../components/ui/NavBar/index.js";
-import logo from '../../assets/images/logo.png';
-import iconNotification from '../../assets/images/icon_notification.png';
-import iconProfile from '../../assets/images/icon_profile.png';
-import iconRandom from '../../assets/images/icon_random.png';
-import edit from '../../assets/images/edit.png';
-import seta from '../../assets/images/seta_icon_esquerda.png';
+import logo from "../../assets/images/logo.png";
+import iconNotification from "../../assets/images/icon_notification.png";
+import iconProfile from "../../assets/images/icon_profile.png";
+import iconRandom from "../../assets/images/icon_random.png";
+import edit from "../../assets/images/edit.png";
+import seta from "../../assets/images/seta_icon_esquerda.png";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -71,7 +71,10 @@ function AlunoDetalhe() {
         const token = localStorage.getItem("authToken");
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
-        const educatorRes = await axios.get(`${API_BASE_URL}/educator/me`, config);
+        const educatorRes = await axios.get(
+          `${API_BASE_URL}/educator/me`,
+          config
+        );
         const educatorData = educatorRes.data || {};
 
         setEducatorDetails({
@@ -89,7 +92,9 @@ function AlunoDetalhe() {
           ? studentRes.data
           : studentRes.data.students || [];
 
-        const studentData = list.find((s) => String(s.id) === String(studentId));
+        const studentData = list.find(
+          (s) => String(s.id) === String(studentId)
+        );
 
         if (!studentData) {
           setIsLoading(false);
@@ -124,7 +129,9 @@ function AlunoDetalhe() {
             (sum, item) => sum + (item.accuracy || 0),
             0
           );
-          totalAccuracy = Math.round((sumAccuracy / categoriesWithProgress.length) * 100);
+          totalAccuracy = Math.round(
+            (sumAccuracy / categoriesWithProgress.length) * 100
+          );
         }
 
         if (totalAccuracy < 0) totalAccuracy = 0;
@@ -194,14 +201,16 @@ function AlunoDetalhe() {
   }
 
   const { name, age, learningTopics, photoUrl } = studentDetails;
-  const firstTopic = Array.isArray(learningTopics) ? learningTopics[0] : learningTopics;
+  const firstTopic = Array.isArray(learningTopics)
+    ? learningTopics[0]
+    : learningTopics;
 
   const educatorName = educatorDetails?.name || "Profissional responsável";
   const educatorPhotoUrl = educatorDetails?.photoUrl || "";
 
   return (
     <div className="aluno-detalhe-container">
-     <Navbar activePage="students" />
+      <Navbar activePage="students" />
 
       <main className="main-content-detalhe">
         <div className="back-arrow-container">
@@ -212,7 +221,11 @@ function AlunoDetalhe() {
 
         <div className="info-card">
           <div className="info-section">
-            <img src={photoUrl || iconRandom} alt={name} className="avatar-grande1" />
+            <img
+              src={photoUrl || iconRandom}
+              alt={name}
+              className="avatar-grande1"
+            />
             <div className="info-text1">
               <h3>{name}</h3>
               <p>{age || "?"} anos</p>
@@ -269,7 +282,9 @@ function AlunoDetalhe() {
                     style={{ width: `${overallCompletionRate}%` }}
                   ></div>
                 </div>
-                <span className="progress-percent-main">{overallCompletionRate}%</span>
+                <span className="progress-percent-main">
+                  {overallCompletionRate}%
+                </span>
               </div>
 
               <div className="sub-progress-container">
@@ -277,7 +292,15 @@ function AlunoDetalhe() {
                   progressData.map((item, index) => (
                     <SubProgressItem
                       key={index}
-                      category={item.category}
+                      category={(() => {
+                        if (item.category === "reading") return "Leitura";
+                        if (item.category === "writing") return "Escrita";
+                        if (item.category === "vocabulary")
+                          return "Vocabulário";
+                        if (item.category === "comprehension")
+                          return "Compreensão";
+                        return item.category;
+                      })()}
                       percentage={Math.round((item.accuracy || 0) * 100)}
                     />
                   ))
@@ -307,17 +330,26 @@ function AlunoDetalhe() {
                 historyData.map((session, index) => (
                   <HistoryRow
                     key={index}
-                    activityName={session.sessionName || session.activityName || "Sessão"}
-                    date={session.startedAt || session.date || session.createdAt}
+                    activityName={
+                      session.sessionName || session.activityName || "Sessão"
+                    }
+                    date={
+                      session.startedAt || session.date || session.createdAt
+                    }
                     status={
                       session.status ||
-                      (session.finishedAt || session.isFinished ? "Concluído" : "Pendente")
+                      (session.finishedAt || session.isFinished
+                        ? "Concluído"
+                        : "Pendente")
                     }
                   />
                 ))
               ) : (
                 <tr>
-                  <td colSpan="3" style={{ textAlign: "center", color: "#999" }}>
+                  <td
+                    colSpan="3"
+                    style={{ textAlign: "center", color: "#999" }}
+                  >
                     Nenhum histórico encontrado.
                   </td>
                 </tr>
