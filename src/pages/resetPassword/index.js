@@ -54,7 +54,7 @@ function ResetPasswordPage() {
             code: code 
         };
 
-        const API_URL = 'https://labirinto-do-saber.vercel.app/educator/update-password';
+        const API_URL = `${process.env.REACT_APP_API_BASE_URL}/educator/update-password`;
 
         try {
             

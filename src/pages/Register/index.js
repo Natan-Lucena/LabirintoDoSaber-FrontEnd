@@ -36,8 +36,9 @@ function RegisterPage() {
       password: password,
     };
 
-    try {
-      const API_URL = "https://labirinto-do-saber.vercel.app/educator/register";
+        try {
+            
+            const API_URL = `${process.env.REACT_APP_API_BASE_URL}/educator/register`;
 
       const response = await axios.post(API_URL, payload);
 

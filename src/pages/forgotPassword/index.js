@@ -30,7 +30,7 @@ function ForgotPasswordPage() {
         };
 
         try {
-            const API_URL = 'https://labirinto-do-saber.vercel.app/educator/generate-token';
+            const API_URL = `${process.env.REACT_APP_API_BASE_URL}/educator/generate-token`;
             await axios.put(API_URL, payload);
 
             alert(`Um código de recuperação foi enviado para ${email}.`);

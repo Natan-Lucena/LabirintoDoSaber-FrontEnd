@@ -40,7 +40,7 @@ function SessionPage() {
                 };
 
                 // 2. Faz a chamada com Axios passando o config
-                const response = await axios.get("https://labirinto-do-saber.vercel.app/student/", config);
+                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/student/`, config);
                 
                 // 3. Formata os dados
                 const formattedData = response.data.map(student => ({

@@ -75,8 +75,8 @@ function ManageGroupPage() {
                 }
                 const config = { headers: { Authorization: `Bearer ${token}` } };
                 const [groupsResponse, tasksResponse] = await Promise.all([
-                    axios.get("https://labirinto-do-saber.vercel.app/task-group/list-by-educator", config),
-                    axios.get("https://labirinto-do-saber.vercel.app/task/", config)
+                    axios.get(`${process.env.REACT_APP_API_BASE_URL}/task-group/list-by-educator`, config),
+                    axios.get(`${process.env.REACT_APP_API_BASE_URL}/task/`, config)
                 ]);
 
                 if (Array.isArray(groupsResponse.data)) setGroups(groupsResponse.data);
@@ -167,7 +167,7 @@ function ManageGroupPage() {
                         id: selectedGroup.id,
                         tasksIds: newTaskIds
                     };
-                    await axios.put('https://labirinto-do-saber.vercel.app/task-group/update', payload, config);
+                    await axios.put(`${process.env.REACT_APP_API_BASE_URL}/task-group/update`, payload, config);
 
                     const updatedGroup = { ...selectedGroup, tasksIds: newTaskIds };
                     setSelectedGroup(updatedGroup);

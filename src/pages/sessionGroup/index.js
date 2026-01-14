@@ -89,8 +89,8 @@ function SessionGroupPage() {
 
                 // Executa as duas requisições em paralelo
                 const [groupsResponse, tasksResponse] = await Promise.all([
-                    axios.get("https://labirinto-do-saber.vercel.app/task-group/list-by-educator", config),
-                    axios.get("https://labirinto-do-saber.vercel.app/task/", config)
+                    axios.get(`${process.env.REACT_APP_API_BASE_URL}/task-group/list-by-educator`, config),
+                    axios.get(`${process.env.REACT_APP_API_BASE_URL}/task/`, config)
                 ]);
                 
                 setGroups(groupsResponse.data);
@@ -187,7 +187,7 @@ function SessionGroupPage() {
             };
 
             const response = await axios.post(
-                "https://labirinto-do-saber.vercel.app/task-notebook-session/start", 
+                `${process.env.REACT_APP_API_BASE_URL}/task-notebook-session/start`, 
                 payload, 
                 config
             );

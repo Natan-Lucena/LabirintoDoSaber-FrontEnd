@@ -47,7 +47,7 @@ function GroupSelectPage() {
                 const token = localStorage.getItem('authToken');
                 const config = { headers: { Authorization: `Bearer ${token}` } };
                 
-                const response = await axios.get('https://labirinto-do-saber.vercel.app/task-group/list-by-educator', config);
+                const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/task-group/list-by-educator`, config);
                 
                 // Filtra para não mostrar grupos que já estão no caderno (opcional, mas melhora a UX)
                 // Se quiser mostrar todos e apenas marcar como "já adicionado", a lógica seria diferente.
@@ -104,7 +104,7 @@ function GroupSelectPage() {
                 taskGroupsIds: finalGroupIds
             };
 
-            await axios.put('https://labirinto-do-saber.vercel.app/task-notebook/update', payload, config);
+            await axios.put(`${process.env.REACT_APP_API_BASE_URL}/task-notebook/update`, payload, config);
 
             alert("Grupos adicionados com sucesso!");
             // Volta para a tela do caderno

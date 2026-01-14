@@ -154,8 +154,8 @@ function NotebookDetailsPage() {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
 
                 const [notebooksResponse, tasksResponse] = await Promise.all([
-                    axios.get('https://labirinto-do-saber.vercel.app/task-notebook/', config),
-                    axios.get('https://labirinto-do-saber.vercel.app/task/', config)
+                    axios.get(`${process.env.REACT_APP_API_BASE_URL}/task-notebook/`, config),
+                    axios.get(`${process.env.REACT_APP_API_BASE_URL}/task/`, config)
                 ]);
                 
                 if (Array.isArray(tasksResponse.data)) {
@@ -258,7 +258,7 @@ function NotebookDetailsPage() {
                 };
 
                 await axios.put(
-                    'https://labirinto-do-saber.vercel.app/task-notebook/update',
+                    `${process.env.REACT_APP_API_BASE_URL}/task-notebook/update`,
                     payload,
                     config
                 );

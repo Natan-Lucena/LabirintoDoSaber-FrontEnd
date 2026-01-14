@@ -130,7 +130,7 @@ export default function AdicionarAtividadePersonalize() {
     if (showAudioField && audioFile) formData.append("audioFile", audioFile);
 
     try {
-        await axios.post('https://labirinto-do-saber.vercel.app/task/create', formData, {
+        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/task/create`, formData, {
             headers: { Authorization: `Bearer ${token}` }
         });
         alert('Atividade criada com sucesso!');

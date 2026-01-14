@@ -79,7 +79,7 @@ function ManageActivitiesPage() {
         headers: { Authorization: `Bearer ${token}` }
       };
 
-      const response = await axios.get('https://labirinto-do-saber.vercel.app/task/', config);
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/task/`, config);
       
       if (Array.isArray(response.data)) {
         setActivities(response.data);
