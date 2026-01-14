@@ -40,8 +40,7 @@ function RegisterPage() {
             
             const API_URL = `${process.env.REACT_APP_API_BASE_URL}/educator/register`;
 
-            
-            const response = await axios.post(API_URL, payload);
+      const response = await axios.post(API_URL, payload);
 
       console.log("Resposta da API:", response.data);
 

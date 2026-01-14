@@ -127,7 +127,7 @@ function ManageNotebookPage() {
             const token = localStorage.getItem('authToken');
             const config = { headers: { Authorization: `Bearer ${token}` } };
     
-            await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/task-notebook/delete/${notebookToDelete}`, config);
+            await axios.delete(`https://labirinto-do-saber.vercel.app/task-notebook/delete/${notebookToDelete}`, config);
             
             setNotebooks(notebooks.filter(item => item.notebook.id !== notebookToDelete));
             

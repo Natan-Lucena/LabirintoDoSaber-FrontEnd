@@ -238,7 +238,7 @@ function NotebookDetailsPage() {
             // CENÁRIO 1: Caderno Vazio -> Deletar Caderno
             if (remainingGroups.length === 0) {
                 await axios.delete(
-                    `${process.env.REACT_APP_API_BASE_URL}/task-notebook/delete/${notebookId}`,
+                    `https://labirinto-do-saber.vercel.app/task-notebook/delete/${notebookId}`,
                     config
                 );
 

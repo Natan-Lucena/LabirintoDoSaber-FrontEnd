@@ -6,7 +6,7 @@ import "./style.css";
 import logo from "../../../assets/images/logo.png";
 import iconProfile from "../../../assets/images/icon_profile.png";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const API_BASE_URL = "https://labirinto-do-saber.vercel.app";
 
 // Adicionamos a prop 'activePage' aqui
 function Navbar({ activePage }) {
