@@ -34,7 +34,10 @@ function AlunosPage() {
       };
 
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/task-notebook/`, config);
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_BASE_URL}/task-notebook/`,
+          config
+        );
         // O backend retorna um array de objetos { notebook: {...}, taskGroups: [...] }
         setNotebooks(response.data);
       } catch (error) {
@@ -120,15 +123,51 @@ function AlunosPage() {
 
                   {isCriarOpen && (
                     <div className="dropdown-menu">
-                      <a onClick={() => handleNavigate("/addNotebook")}>
+                      <button
+                        type="button"
+                        onClick={() => handleNavigate("/addNotebook")}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          width: "100%",
+                          textAlign: "left",
+                          padding: 0,
+                          font: "inherit",
+                        }}
+                      >
                         Criar caderno
-                      </a>
-                      <a onClick={() => handleNavigate("/GroupActivities")}>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleNavigate("/GroupActivities")}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          width: "100%",
+                          textAlign: "left",
+                          padding: 0,
+                          font: "inherit",
+                        }}
+                      >
                         Criar grupo de atividades
-                      </a>
-                      <a onClick={() => handleNavigate("/CreateNewActivitie")}>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleNavigate("/CreateNewActivitie")}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          width: "100%",
+                          textAlign: "left",
+                          padding: 0,
+                          font: "inherit",
+                        }}
+                      >
                         Criar atividade
-                      </a>
+                      </button>
                     </div>
                   )}
                 </div>
@@ -164,15 +203,51 @@ function AlunosPage() {
 
                   {isGerenciarOpen && (
                     <div className="dropdown-menu">
-                      <a onClick={() => handleNavigate("/ManageNotebook")}>
+                      <button
+                        type="button"
+                        onClick={() => handleNavigate("/ManageNotebook")}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          width: "100%",
+                          textAlign: "left",
+                          padding: 0,
+                          font: "inherit",
+                        }}
+                      >
                         Gerenciar cadernos
-                      </a>
-                      <a onClick={() => handleNavigate("/ManageGroup")}>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleNavigate("/ManageGroup")}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          width: "100%",
+                          textAlign: "left",
+                          padding: 0,
+                          font: "inherit",
+                        }}
+                      >
                         Gerenciar grupo de atividades
-                      </a>
-                      <a onClick={() => handleNavigate("/ManageActivities")}>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleNavigate("/ManageActivities")}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          width: "100%",
+                          textAlign: "left",
+                          padding: 0,
+                          font: "inherit",
+                        }}
+                      >
                         Gerenciar atividades
-                      </a>
+                      </button>
                     </div>
                   )}
                 </div>

@@ -33,10 +33,7 @@ function ProfileEdit() {
         }
 
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        const response = await axios.get(
-          `${API_BASE_URL}/educator/me`,
-          config
-        );
+        const response = await axios.get(`${API_BASE_URL}/educator/me`, config);
         const userData = response.data;
 
         // Preencher os dados do formulário com os dados recebidos da API
@@ -105,9 +102,7 @@ function ProfileEdit() {
 
       if (response.data) {
         const newAvatar =
-          response.data.photoUrl ||
-          response.data._photoUrl ||
-          avatarUrl;
+          response.data.photoUrl || response.data._photoUrl || avatarUrl;
         setAvatarUrl(newAvatar);
       }
 
@@ -156,10 +151,7 @@ function ProfileEdit() {
     setLoading(true);
     setError(""); // Limpar mensagens de erro antes de tentar salvar
 
-    const results = await Promise.all([
-      handleUpdateTextData(),
-      handleProfilePictureUpload(),
-    ]);
+    await Promise.all([handleUpdateTextData(), handleProfilePictureUpload()]);
 
     setLoading(false);
   };
@@ -188,20 +180,23 @@ function ProfileEdit() {
       <main className="profile-main-content">
         <div className="profile-container">
           <div className="top-nav-row">
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate(-1);
-              }}
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
               className="back-arrow-link"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+              }}
             >
               <img
                 src={iconArrowLeft}
                 alt="Voltar"
                 className="back-arrow-icon"
               />
-            </a>
+            </button>
           </div>
 
           <div className="profile-edit-card">

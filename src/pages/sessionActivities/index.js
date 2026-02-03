@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import axios from "axios";
-import logo from "../../assets/images/logo.png";
-import iconNotification from "../../assets/images/icon_notification.png";
-import iconProfile from "../../assets/images/icon_profile.png";
 import iconArrowLeft from "../../assets/images/seta_icon_esquerda.png";
-import iconActivity from "../../assets/images/iconActivitie.png"; 
+import iconActivity from "../../assets/images/iconActivitie.png";
 import SearchBar from "../../components/ui/SearchBar/Search";
-import { useNavigate, useLocation } from "react-router-dom"; 
+import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../../components/ui/NavBar/index.js";
 const PlusIcon = () => (
-  <svg width="25" height="25" viewBox="0 0 65 69" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="25"
+    height="25"
+    viewBox="0 0 65 69"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <g filter="url(#filter0_d_398_2393)">
       <path d="M46.0418 32.5003H18.9585" stroke="black" strokeLinecap="round" />
       <path d="M32.4998 46.0413V18.958" stroke="black" strokeLinecap="round" />
@@ -62,7 +65,13 @@ const PlusIcon = () => (
 );
 
 const CheckIcon = () => (
-  <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="25"
+    height="25"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M20 6L9 17L4 12"
       stroke="white"
@@ -145,7 +154,7 @@ function SessionActivitiesPage() {
     }
   };
 
- const handleStartSession = async () => {
+  const handleStartSession = async () => {
     // 1. Validações Iniciais
     if (!selectedActivity) {
       alert("Selecione uma atividade.");
@@ -161,22 +170,22 @@ function SessionActivitiesPage() {
 
     try {
       const token = localStorage.getItem("authToken");
-      
+
       // 2. Monta o Payload para a rota /start
       // Geralmente essa rota espera receber quem é o aluno e qual é a tarefa
       const payload = {
         studentId: studentId,
         name: sessionName,
-        taskId: selectedActivity.id
+        taskId: selectedActivity.id,
         // Se o backend exigir notebookId mesmo que nulo, descomente abaixo:
-        // notebookId: null 
+        // notebookId: null
       };
 
       console.log("Iniciando sessão em /start com:", payload);
 
       // 3. Chamada POST para a rota CORRETA
       const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/task-notebook-session/start`, 
+        `${process.env.REACT_APP_API_BASE_URL}/task-notebook-session/start`,
         payload,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -202,15 +211,18 @@ function SessionActivitiesPage() {
           task: selectedActivity.originalData,
         },
       });
-
     } catch (error) {
       console.error("❌ Erro ao iniciar sessão:", error);
-      
+
       if (error.response) {
-         // Mostra erro detalhado se o servidor recusar (ex: aluno não encontrado, task inválida)
-         alert(`Erro ao iniciar: ${error.response.status} - ${JSON.stringify(error.response.data)}`);
+        // Mostra erro detalhado se o servidor recusar (ex: aluno não encontrado, task inválida)
+        alert(
+          `Erro ao iniciar: ${error.response.status} - ${JSON.stringify(
+            error.response.data
+          )}`
+        );
       } else {
-         alert("Erro de conexão. Verifique sua internet.");
+        alert("Erro de conexão. Verifique sua internet.");
       }
     } finally {
       setIsStarting(false);
@@ -247,11 +259,7 @@ function SessionActivitiesPage() {
       <main className="session-activity-select-main-content">
         <div className="session-activity-select-container">
           <a href="/sessionType" className="back-arrow-link">
-            <img
-              src={iconArrowLeft}
-              alt="Voltar"
-              className="back-arrow-icon"
-            />
+            <img src={iconArrowLeft} alt="Voltar" className="back-arrow-icon" />
           </a>
           <div className="top-container">
             <h1>Selecione a atividade desejada</h1>
@@ -301,117 +309,132 @@ function SessionActivitiesPage() {
               <p style={{ textAlign: "center", color: "#666" }}>
                 Carregando atividades...
               </p>
-            ) : (
-              currentItems.length > 0 ? (
-                currentItems.map((activity) => {
-                  const isSelected =
-                    selectedActivity && selectedActivity.id === activity.id;
+            ) : currentItems.length > 0 ? (
+              currentItems.map((activity) => {
+                const isSelected =
+                  selectedActivity && selectedActivity.id === activity.id;
 
-                  return (
+                return (
+                  <div
+                    className="activity-select-row-wrapper"
+                    key={activity.id}
+                  >
                     <div
-                      className="activity-select-row-wrapper"
-                      key={activity.id}
+                      className="activity-select-list-item-card"
+                      style={{
+                        cursor: "pointer",
+                        border: isSelected
+                          ? "2px solid #81C784"
+                          : "2px solid transparent",
+                        backgroundColor: isSelected ? "#F1F8E9" : "#FFF",
+                        transition: "all 0.2s ease",
+                      }}
+                      onClick={() => handleActivitySelection(activity)}
                     >
-                      <div
-                        className="activity-select-list-item-card"
-                        style={{
-                          cursor: "pointer",
-                          border: isSelected
-                            ? "2px solid #81C784"
-                            : "2px solid transparent",
-                          backgroundColor: isSelected ? "#F1F8E9" : "#FFF",
-                          transition: "all 0.2s ease",
-                        }}
-                        onClick={() => handleActivitySelection(activity)}
-                      >
-                        <img
-                          src={iconActivity}
-                          alt="Icone Atividade"
-                          className="activity-select-card-icon"
-                        />
-                        <div className="activity-select-card-info">
-                          <h3>{activity.name}</h3>
-                          <button className="activity-select-bnt-details">
-                            {categoryMap[activity.category] ||
-                              activity.category}
-                          </button>
-                        </div>
-
-                        <button
-                          className="select-plus-btn"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleActivitySelection(activity);
-                          }}
-                          title={isSelected ? "Desmarcar" : "Selecionar"}
-                          style={{
-                            backgroundColor: isSelected ? "#81C784" : "transparent",
-                            borderRadius: "50%",
-                            width: "40px",
-                            height: "40px",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            border: "none",
-                            transition: "background-color 0.3s ease",
-                          }}
-                        >
-                          {isSelected ? <CheckIcon /> : <PlusIcon />}
+                      <img
+                        src={iconActivity}
+                        alt="Icone Atividade"
+                        className="activity-select-card-icon"
+                      />
+                      <div className="activity-select-card-info">
+                        <h3>{activity.name}</h3>
+                        <button className="activity-select-bnt-details">
+                          {categoryMap[activity.category] || activity.category}
                         </button>
                       </div>
+
+                      <button
+                        className="select-plus-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleActivitySelection(activity);
+                        }}
+                        title={isSelected ? "Desmarcar" : "Selecionar"}
+                        style={{
+                          backgroundColor: isSelected
+                            ? "#81C784"
+                            : "transparent",
+                          borderRadius: "50%",
+                          width: "40px",
+                          height: "40px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          border: "none",
+                          transition: "background-color 0.3s ease",
+                        }}
+                      >
+                        {isSelected ? <CheckIcon /> : <PlusIcon />}
+                      </button>
                     </div>
-                  );
-                })
-              ) : (
-                <p style={{ textAlign: "center", marginTop: "20px" }}>
-                  {searchTerm
-                    ? "Nenhuma atividade encontrada."
-                    : "Nenhuma atividade disponível."}
-                </p>
-              )
+                  </div>
+                );
+              })
+            ) : (
+              <p style={{ textAlign: "center", marginTop: "20px" }}>
+                {searchTerm
+                  ? "Nenhuma atividade encontrada."
+                  : "Nenhuma atividade disponível."}
+              </p>
             )}
           </div>
 
           {!loading && filteredActivities.length > 0 && (
             <div className="pagination-controls">
-              <a
-                href="#"
+              <button
+                type="button"
                 className={`page-arrow ${currentPage === 1 ? "disabled" : ""}`}
-                onClick={(e) => {
-                  e.preventDefault();
+                onClick={() => {
                   if (currentPage > 1) setCurrentPage(currentPage - 1);
+                }}
+                style={{
+                  pointerEvents: currentPage === 1 ? "none" : "auto",
+                  opacity: currentPage === 1 ? 0.5 : 1,
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
                 }}
               >
                 {" "}
                 &lt;{" "}
-              </a>
+              </button>
               {Array.from({ length: totalPages }, (_, index) => (
-                <a
+                <button
                   key={index + 1}
-                  href="#"
+                  type="button"
                   className={`page-number ${
                     currentPage === index + 1 ? "active" : ""
                   }`}
                   onClick={(e) => paginate(e, index + 1)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
                 >
                   {" "}
                   {index + 1}{" "}
-                </a>
+                </button>
               ))}
-              <a
-                href="#"
+              <button
+                type="button"
                 className={`page-arrow ${
                   currentPage === totalPages ? "disabled" : ""
                 }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (currentPage < totalPages)
-                    setCurrentPage(currentPage + 1);
+                onClick={() => {
+                  if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                }}
+                style={{
+                  pointerEvents: currentPage === totalPages ? "none" : "auto",
+                  opacity: currentPage === totalPages ? 0.5 : 1,
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
                 }}
               >
                 {" "}
                 &gt;{" "}
-              </a>
+              </button>
             </div>
           )}
         </div>

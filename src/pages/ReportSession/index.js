@@ -3,9 +3,6 @@ import "./styles.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
-import logo from "../../assets/images/logo.png";
-import iconNotification from "../../assets/images/icon_notification.png";
-import iconProfile from "../../assets/images/icon_profile.png";
 import iconArrowLeft from "../../assets/images/seta_icon_esquerda.png";
 import Navbar from "../../components/ui/NavBar/index.js";
 const API_BASE_URL = "https://labirinto-do-saber.vercel.app";

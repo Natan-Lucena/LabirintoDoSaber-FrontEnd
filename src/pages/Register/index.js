@@ -5,9 +5,6 @@ import axios from "axios"; // Importa o axios
 
 import Button from "../../components/ui/ButtonYellow/Button";
 import Input from "../../components/ui/InputWhite/Input";
-import logo from "../../assets/images/logo.png";
-import onda from "../../assets/images/ondaLogin.png";
-import googleIcon from "../../assets/images/Google.png";
 
 function RegisterPage() {
   const [nomeCompleto, setNomeCompleto] = useState("");
@@ -36,9 +33,8 @@ function RegisterPage() {
       password: password,
     };
 
-        try {
-            
-            const API_URL = `${process.env.REACT_APP_API_BASE_URL}/educator/register`;
+    try {
+      const API_URL = `${process.env.REACT_APP_API_BASE_URL}/educator/register`;
 
       const response = await axios.post(API_URL, payload);
 
