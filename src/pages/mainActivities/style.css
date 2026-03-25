@@ -322,7 +322,76 @@ body {
 }
 
 .dropdown-arrow {
-    width: 32px; 
+    width: 32px;
     height: 32px;
+}
+
+/* Seções da página de atividades */
+.activities-section {
+  margin-bottom: 2.5rem;
+}
+
+.activities-section-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 1rem 15px;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #D8F5F3;
+  display: inline-block;
+}
+
+.activities-empty-text {
+  color: #999;
+  font-family: 'Nunito', sans-serif;
+  margin-left: 15px;
+}
+
+.activities-toggle-btn {
+  margin-top: 1rem;
+  margin-left: 15px;
+  background: none;
+  border: none;
+  color: #008D85;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.activities-toggle-btn:hover {
+  text-decoration: underline;
+}
+
+/* Skeleton */
+.skeleton-card {
+  pointer-events: none;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 8px;
+}
+
+.skeleton-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-right: 50px;
+  flex-shrink: 0;
+}
+
+.skeleton-text {
+  height: 18px;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
