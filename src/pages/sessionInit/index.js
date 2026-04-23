@@ -173,16 +173,35 @@ const OptionButtons = ({ options, onSelect, selectedId, isAnswered, feedback }) 
   );
 };
 
+const ActivityImage = ({ src }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <div className="activity-image-wrapper">
+        <img
+          src={src}
+          alt="Atividade"
+          className="activity-main-image"
+          onClick={() => setOpen(true)}
+        />
+      </div>
+
+      {open && (
+        <div className="lightbox-overlay" onClick={() => setOpen(false)}>
+          <img src={src} alt="Atividade ampliada" onClick={(e) => e.stopPropagation()} />
+        </div>
+      )}
+    </>
+  );
+};
+
 const MixedActivity = (props) => {
   const { imageSrc, question, ...rest } = props;
 
   return (
     <>
-      {imageSrc && (
-        <div className="activity-image-wrapper">
-          <img src={imageSrc} alt="Atividade" className="activity-main-image" />
-        </div>
-      )}
+      {imageSrc && <ActivityImage src={imageSrc} />}
       {props.audioSrc && <AudioPlayerControl audioSrc={props.audioSrc} />}
       <h2 className="session-activity-question">{question}</h2>
       <OptionButtons {...rest} />
@@ -195,11 +214,7 @@ const VisualActivity = (props) => {
 
   return (
     <>
-      {imageSrc && (
-        <div className="activity-image-wrapper">
-          <img src={imageSrc} alt="Atividade" className="activity-main-image" />
-        </div>
-      )}
+      {imageSrc && <ActivityImage src={imageSrc} />}
       <h2 className="session-activity-question">{question}</h2>
       <OptionButtons {...rest} />
     </>
