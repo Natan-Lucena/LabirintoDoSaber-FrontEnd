@@ -1,253 +1,504 @@
-body {
-  margin: 0;
-  font-family: Nunito, sans-serif;
-  background-color: #fcfcff; 
-  color: #333;
-}
-
-.home-dashboard-container {
+.home-page {
+  min-height: 100vh;
+  background-color: #fcfcff;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-}
-
-/* HEADER PERMANECE */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2.5rem;
-  background-color: #fff;
-  border-bottom: 1px solid #eaeaea;
-}
-
-.logo {
-  width: 150px;
-  height: 70px;
-  object-fit: contain;
-}
-
-.navbar {
-  display: flex;
-  gap: 2rem;
-  margin-left: -10%; 
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #555;
-  font-weight: 600;
-  font-size: 20px;
-  padding-bottom: 4px;
-  margin-left: 10%;
-}
-
-.nav-link.active {
-  color: #63E9E2; 
-  border-bottom: 3px solid #63E9E2;
-}
-
-.home-user-controls {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.icon {
-  height: 41px;
-  width: 48px;
-  cursor: pointer;
-  object-fit: contain;
-}
-
-.profile-icon {
-  border-radius: 50%;
-  background-color: #333; 
-  height: 59px;
-  width: 59px;
-}
-
-/* MAIN */
-.home-main-content {
-  display: flex;
-  flex: 1;
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-  gap: 170px;
-  margin-top: 35px;
-}
-
-.home-content-left {
-  flex: 1;
-  margin-left: 50px;
-}
-
-.home-content-right {
-  flex: 0.7;
-  margin-left: 50px;
-}
-
-.home-content-left h1 {
-  font-size: 3rem;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  color: #111;
-}
-
-.home-welcome-message {
-  color: #777;
-  font-size: 1.5rem;
-  margin-top: 0;
-  margin-bottom: 2.5rem;
-}
-
-.home-content-left h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: #222;
-}
-
-/* ACTIVITY CARDS */
-.home-activity-card {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 50px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  height: 30%;
-  width: 110%;
-}
-
-.home-activity-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-}
-
-.home-activity-image {
-  height: 90px;
-  margin-right: 1.5rem;
-}
-
-.home-activity-info h3 {
-  margin: 0 0 0.25rem 0;
-  font-size: 1.25rem;
+  font-family: 'Nunito', sans-serif;
   color: #333;
 }
 
-.home-activity-info p {
-  margin: 0;
-  color: #666;
-  font-size: 0.95rem;
+.home-content {
+  flex: 1;
+  padding: 2rem 2.5rem 3rem;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-.home-arrow {
-  margin-left: auto;
-  height: 57px;
-  width: 57px;
+.home-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 0.25rem;
 }
 
-/* BUTTON */
-.home-action-buttons {
-  display: flex;
-  gap: 3rem;
-  margin-bottom: 2.5rem;
-}
-
-.home-btn-primary-session {
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 30px;
-  font-family: "Nunito", sans-serif;
-  font-weight: 200;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: background-color 0.2s;
-  background-color: #D8F5F3;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
-  width: 250px;
-  margin-top: 20px;
-  margin-left: 170px;
-}
-
-.home-btn-primary-session:hover {
-  background-color: #66c0d4;
-}
-
-
-.home-content-right h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #222;
-}
-
-.home-student-list-card {
-  background-color: #fff;
-  border-radius: 50px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  width: 80%;
-  height: 65%;
-}
-
-.home-student-list-header {
-  display: flex;
-  justify-content: space-between;
+.home-subtitle {
+  font-size: 1.05rem;
   color: #999;
-  font-size: 1.3rem;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  padding: 0 1rem;
-  padding-bottom: 15px;
-  border-bottom: 0.1px solid #AEE2E0;
+  margin: 0 0 1.75rem;
 }
 
-.home-student-row {
+/* Linhas do layout */
+.home-row {
   display: flex;
-  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  align-items: stretch;
+}
+
+.home-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 1.4rem 1.6rem;
+  box-sizing: border-box;
+}
+
+/* ===== Linha 1: banner + sessões de hoje ===== */
+.home-banner {
+  flex: 1;
+  display: flex;
   align-items: center;
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
-  margin-bottom: 0.5rem;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: linear-gradient(95deg, #5be0d8 0%, #7ceee5 100%);
+  border-radius: 18px;
+  padding: 1.6rem 2rem;
+  box-shadow: 0 6px 18px rgba(99, 233, 226, 0.4);
 }
 
-.home-student-row:hover {
-  background-color: #f7f9fa;
+.home-banner-text h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 4px;
 }
 
-.home-student-name-group {
+.home-banner-text p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+}
+
+.home-banner-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #2cc9c1;
+  border: none;
+  border-radius: 26px;
+  padding: 0.85rem 1.8rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s;
+  white-space: nowrap;
+}
+
+.home-banner-btn:hover {
+  transform: translateY(-2px);
+}
+
+.home-banner-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.home-sessions-today {
+  width: 340px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-sessions-today-label {
+  font-size: 0.9rem;
+  color: #8a9a98;
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+
+.home-sessions-today-count {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
+  line-height: 1;
+}
+
+.home-sessions-today-icon {
+  font-size: 2rem;
+}
+
+/* ===== Linha 2: agenda do dia + calendário ===== */
+.home-schedule-card {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-schedule-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+
+.home-schedule-date {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
+}
+
+.home-schedule-weekday {
+  font-size: 0.8rem;
+  color: #999;
+  margin: 2px 0 0;
+}
+
+.home-schedule-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #2cc9c1;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.home-schedule-link:hover {
+  color: #00a89f;
+}
+
+.home-schedule-link svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.home-schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.home-schedule-item {
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-weight: 600;
-  font-size: 1.5rem;
-
+  background: #fbfbfd;
+  border-radius: 12px;
+  border-left: 4px solid #63e9e2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 0.9rem 1.1rem;
+  cursor: pointer;
+  transition: transform 0.15s;
 }
 
-.home-student-avatar {
-  height: 60px;
-  width: 60px;
+.home-schedule-item:hover {
+  transform: translateY(-2px);
+}
+
+.home-schedule-avatar {
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   object-fit: cover;
-  
+  flex-shrink: 0;
 }
 
-.home-student-activity-tag {
-  background-color: #FFF6D8;
-  color: #000;
-  padding: 0.5rem 1rem;
-  border-radius: 60px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  font-family: Nunito;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
+.home-schedule-info h4 {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #222;
+  margin: 0 0 3px;
 }
-/* Adicione isso ao seu style.css */
 
-/* Animação do esqueleto */
+.home-schedule-info span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 2px;
+}
+
+.home-schedule-info svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+/* Calendário */
+.home-agenda-card {
+  width: 340px;
+  flex-shrink: 0;
+}
+
+.home-agenda-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+
+.home-agenda-header h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
+}
+
+.home-agenda-add-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: #63e9e2;
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(99, 233, 226, 0.45);
+  transition: all 0.2s;
+}
+
+.home-agenda-add-btn:hover {
+  background: #44d9d2;
+  transform: scale(1.06);
+}
+
+/* ===== Linha 3: atividades + últimas sessões ===== */
+.home-activities-card {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-last-sessions-card {
+  flex: 1.1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+
+.home-card-header h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
+}
+
+.home-see-all {
+  background: none;
+  border: none;
+  color: #2cc9c1;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.home-see-all:hover {
+  color: #00a89f;
+}
+
+.home-activities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+}
+
+.home-activity-mini-card {
+  border-radius: 14px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.15s;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-activity-mini-card:hover {
+  transform: translateY(-3px);
+}
+
+.home-activity-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.7rem;
+}
+
+.home-activity-icon-box img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.home-activity-mini-card h4 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #222;
+  margin: 0 0 5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.home-activity-mini-card p {
+  font-size: 0.78rem;
+  color: #667;
+  margin: 0 0 0.8rem;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.home-activity-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.home-activity-tag {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.home-activity-skeleton {
+  height: 160px;
+  border-radius: 14px;
+}
+
+/* Últimas sessões */
+.home-last-sessions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex: 1;
+}
+
+.home-last-session-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: #fbfbfd;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  transition: transform 0.15s;
+  flex: 1;
+}
+
+.home-last-session-item:hover {
+  transform: translateY(-2px);
+}
+
+.home-last-session-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.home-last-session-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-last-session-info h4 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #222;
+  margin: 0 0 4px;
+}
+
+.home-last-session-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.home-last-session-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-last-session-meta img,
+.home-last-session-meta svg {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.home-last-session-tag {
+  border-radius: 10px;
+  padding: 2px 10px;
+  font-weight: 700;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block !important;
+}
+
+.home-last-session-score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.home-score-label {
+  font-size: 0.7rem;
+  color: #aaa;
+}
+
+.home-score-value {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #2cc9c1;
+}
+
+.home-last-session-chevron {
+  color: #ccc;
+  font-size: 1.4rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.home-empty-text {
+  color: #999;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+/* Skeleton loading */
 @keyframes skeleton-loading {
   0% { background-color: #e0e0e0; }
   50% { background-color: #f0f0f0; }
@@ -260,33 +511,31 @@ body {
   background-color: #e0e0e0;
 }
 
-/* Variantes de tamanho para usar no layout */
 .skeleton-text {
-  height: 20px;
+  height: 16px;
   margin-bottom: 8px;
   width: 100%;
 }
 
-.skeleton-title {
-  height: 32px;
-  width: 60%;
-  margin-bottom: 16px;
-}
-
 .skeleton-avatar {
-  width: 40px;
-  height: 40px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
-.skeleton-image-box {
-  width: 60px;
-  height: 60px;
-  border-radius: 8px;
-}
+/* Responsivo */
+@media (max-width: 1000px) {
+  .home-row {
+    flex-direction: column;
+  }
 
-.skeleton-chip {
-  width: 100px;
-  height: 24px;
-  border-radius: 12px;
+  .home-sessions-today,
+  .home-agenda-card {
+    width: 100%;
+  }
+
+  .home-activities-grid {
+    grid-template-columns: 1fr;
+  }
 }
