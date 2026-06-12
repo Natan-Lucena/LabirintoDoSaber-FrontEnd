@@ -1,0 +1,102 @@
+.mini-cal {
+  font-family: 'Nunito', sans-serif;
+  user-select: none;
+}
+
+.mini-cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.mini-cal-month {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #222;
+  text-transform: lowercase;
+}
+
+.mini-cal-nav {
+  background: none;
+  border: none;
+  color: #63e9e2;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 8px;
+}
+
+.mini-cal-nav:hover {
+  color: #2cc9c1;
+}
+
+.mini-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.mini-cal-weekdays {
+  margin-bottom: 4px;
+}
+
+.mini-cal-weekday {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #b5b5b5;
+  padding: 4px 0;
+}
+
+.mini-cal-day {
+  position: relative;
+  background: none;
+  border: none;
+  border-radius: 10px;
+  aspect-ratio: 1 / 1;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.mini-cal-day:hover {
+  background: #eef9f8;
+}
+
+.mini-cal-day.outside {
+  color: #d5d5d5;
+  font-weight: 600;
+}
+
+.mini-cal-day.today {
+  background: #d8f5f3;
+  color: #00847d;
+}
+
+.mini-cal-day.marked::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #63e9e2;
+}
+
+.mini-cal-day.selected {
+  background: #63e9e2;
+  color: #fff;
+}
+
+.mini-cal-day.selected.marked::after {
+  background: #fff;
+}

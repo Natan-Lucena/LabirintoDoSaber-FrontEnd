@@ -33,6 +33,7 @@ import EditStudentPage from "./pages/EditStudent";
 import AnamnesePage from "./pages/anamnese";
 import AnamneseFormPage from "./pages/anamneseForm";
 import AnamneseResponderPage from "./pages/anamneseResponder";
+import AgendaPage from "./pages/agenda";
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
         <Route path="/anamnese/criar" element={<AnamneseFormPage />} />
         <Route path="/anamnese/editar" element={<AnamneseFormPage />} />
         <Route path="/anamnese/responder" element={<AnamneseResponderPage />} />
+        <Route path="/agenda" element={<AgendaPage />} />
       </Routes>
     </div>
   );
