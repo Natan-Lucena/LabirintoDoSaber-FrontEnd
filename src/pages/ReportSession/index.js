@@ -234,7 +234,7 @@ function ReportSession() {
               </div>
             )}
 
-            {!loading && sessionData.observation && (
+            {!loading && !sessionData.observation && (
               <div className="report-observation-box">
                 <h2 className="report-observation-title">Observações da Sessão</h2>
                 <p className="report-observation-text">{sessionData.observation}</p>

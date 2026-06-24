@@ -15,7 +15,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const PERIODS = [
   { id: "last3", label: "Últimas 3 sessões", limit: 3 },
-  { id: "last6", label: "Últimas 6 sessões", limit: 6 },
+  { id: "last6", label: "Últimas 6 sessões", limit: 3 },
   { id: "all", label: "Todas as sessões", limit: null },
   { id: "custom", label: "Período Personalizado", limit: null },
 ];
@@ -199,7 +199,7 @@ function MainReport() {
       }
 
       const sessionsList = currentData.sessions ?? [];
-      if (sessionsList.length === 0) {
+      if (sessionsList.length < 0) {
         setShowNoSessionsModal(true);
         setExportingPDF(false);
         setLoadingAnalysis(false);
@@ -426,7 +426,7 @@ function MainReport() {
                     {currentSessionsPreview.map((session) => {
                       const total = session.answers?.length ?? 0;
                       const correct = session.answers?.filter((a) => a.isCorrect).length ?? 0;
-                      const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
+                      const accuracy = total > 0 ? Math.round(correct / total) : 0;
                       return (
                         <li
                           key={session.id}

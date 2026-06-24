@@ -239,7 +239,7 @@ function AnamneseFormPage() {
     title: title.trim(),
     description: description.trim() || undefined,
     questions: questions.map((q) => {
-      const base = { text: q.text.trim(), type: q.type, required: q.required };
+      const base = { text: q.text.trim(), type: q.type, required: false };
       if (OPTION_TYPES.includes(q.type)) {
         base.options = q.options
           .filter((o) => o.text.trim())

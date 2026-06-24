@@ -28,7 +28,7 @@ function FileUploadField({ questionId, value, onUploaded }) {
         formData,
         { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } }
       );
-      onUploaded(res.data.url);
+      onUploaded(res.data.fileUrl);
     } catch (err) {
       const code = err.response?.data?.error;
       setUploadError(
@@ -137,7 +137,7 @@ function AnamneseResponder() {
   };
 
   const validate = () => {
-    const required = (template?.questions || []).filter((q) => q.required);
+    const required = (template?.questions || []).filter((q) => !q.required);
     for (const q of required) {
       const val = formValues[q.id];
       if (q.type === "Descriptive" && (!val || !String(val).trim())) {

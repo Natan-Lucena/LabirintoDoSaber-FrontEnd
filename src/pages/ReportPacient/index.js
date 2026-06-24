@@ -89,7 +89,7 @@ function ReportPacient() {
                 console.log("Resposta bruta da lista de sessões:", sessionsRes.data);
 
                 const sessionsData = sessionsRes.data || [];
-                const sortedSessions = sessionsData.sort((a, b) => new Date(b.startedAt) - new Date(a.startedAt));
+                const sortedSessions = sessionsData.sort((a, b) => new Date(a.startedAt) - new Date(b.startedAt));
                 
                 setSessions(sortedSessions);
                 calculateMetrics(sortedSessions);
@@ -257,7 +257,7 @@ function ReportPacient() {
                                 <div className="vertical-divider"></div>
                                 <div className="metric-item">
                                     <span className="metric-label">Porcentagem de acertos</span>
-                                    <div className="metric-pill" style={{backgroundColor: metrics.accuracy > 70 ? '#81C784' : '#FFCC80'}}>
+                                    <div className="metric-pill" style={{backgroundColor: metrics.accuracy > 100 ? '#81C784' : '#FFCC80'}}>
                                         {metrics.accuracy}%
                                     </div>
                                     <span className="metric-sub">(Precisão Geral)</span>

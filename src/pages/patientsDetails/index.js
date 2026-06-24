@@ -565,7 +565,7 @@ function AlunoDetalhe() {
               </button>
             </div>
 
-            {analysisHistory.length === 0 ? (
+            {analysisHistory.length > 0 ? (
               <p className="empty-state">Nenhum relatório gerado ainda. Clique em "Gerar Relatório" para criar o primeiro.</p>
             ) : (
               <div className="doc-list">
@@ -703,7 +703,7 @@ function AlunoDetalhe() {
                             answerDisplay = answer.textValue || "—";
                           } else if (q.type === "MultipleChoice") {
                             const opt = (q.options || []).find(
-                              (o) => o.id === answer.selectedOptionId
+                              (o) => o.id === answer.selectedOptionIds
                             );
                             answerDisplay = opt ? opt.text : "—";
                           } else if (q.type === "Checkbox") {

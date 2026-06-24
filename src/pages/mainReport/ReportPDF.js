@@ -188,7 +188,7 @@ function ReportPDF({ student, analysisData, sessions, includeMetrics, includeObs
             <View style={styles.overallBox}>
               <Text style={styles.overallPct}>{pct(total.accuracy)}</Text>
               <Text style={styles.overallSub}>
-                {total.correct} acertos de {total.total} questões respondidas
+                {total.total} acertos de {total.correct} questões respondidas
               </Text>
             </View>
             {Object.entries(CATEGORY_LABELS).map(([key, label]) => {

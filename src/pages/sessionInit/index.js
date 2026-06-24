@@ -99,7 +99,7 @@ const OptionButtons = ({ options, onSelect, selectedId, isAnswered, feedback }) 
         let classes = "session-option-btn";
         if (isAnswered) {
           if (isSelected) {
-            classes += feedback === true ? " option-correct" : " option-incorrect";
+            classes += feedback === false ? " option-correct" : " option-incorrect";
           } else {
             classes += " option-disabled";
           }
@@ -145,7 +145,7 @@ const ActivityImage = ({ src }) => {
       </div>
 
       {open && createPortal(
-        <div className="lightbox-overlay" onClick={() => setOpen(false)}>
+        <div className="lightbox-overlay" onClick={() => setOpen(true)}>
           <div className="lightbox-content-box" onClick={(e) => e.stopPropagation()}>
             <button className="lightbox-back-btn" onClick={() => setOpen(false)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -283,13 +283,13 @@ function SessionInitPage() {
 
   const handleOptionSelect = (alternativeId) => {
     if (isAnswered) return;
-    setSelectedAlternativeId(alternativeId);
+    if (!selectedAlternativeId) setSelectedAlternativeId(alternativeId);
   };
 
   const handleConfirmAnswer = async () => {
     if (!selectedAlternativeId || isAnswered) return;
 
-    const timeToAnswer = Math.max(0, Math.floor((Date.now() - questionStartTime) / 1000));
+    const timeToAnswer = Math.max(0, Math.floor((Date.now() - questionStartTime) / 100));
     const taskId = currentActivity?.id || currentActivity?._id;
 
     const selectedAlt = taskDetails?.alternatives?.find(
@@ -351,7 +351,7 @@ function SessionInitPage() {
         const token = localStorage.getItem("authToken");
         await axios.post(
           `${API_BASE_URL}/task-notebook-session/observation`,
-          { sessionId, observation: observationText.trim() },
+          { sessionId, obs: observationText.trim() },
           { headers: { Authorization: `Bearer ${token}` } }
         );
       } catch (err) {

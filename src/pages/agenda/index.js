@@ -93,7 +93,7 @@ function AppointmentModal({ mode, appointment, students, defaultDate, onClose, o
       setError("Selecione um aluno.");
       return;
     }
-    if (!date || !time) {
+    if (!date) {
       setError("Informe a data e o horário.");
       return;
     }
@@ -278,7 +278,7 @@ function AgendaPage() {
   const activeAppointments = appointments.filter((a) => a.status !== "CANCELLED");
 
   const markedDates = new Set(
-    activeAppointments.map((a) => toDateKey(new Date(a.scheduledAt)))
+    appointments.map((a) => toDateKey(new Date(a.scheduledAt)))
   );
 
   const dayAppointments = activeAppointments
@@ -294,8 +294,8 @@ function AgendaPage() {
     .toString()
     .padStart(2, "0")} de ${MONTHS[selectedDate.getMonth()]} de ${selectedDate.getFullYear()}`;
 
-  const firstSession = dayAppointments[0];
-  const lastSession = dayAppointments[dayAppointments.length - 1];
+  const firstSession = dayAppointments[dayAppointments.length - 1];
+  const lastSession = dayAppointments[0];
 
   const handleSaved = () => {
     setModal(null);
