@@ -7,7 +7,21 @@
       "Bash(rtk ls *)",
       "Bash(rtk find *)",
       "Bash(rtk grep *)",
-      "Bash(rtk read *)"
+      "Bash(rtk read *)",
+      "Bash(npx react-scripts *)",
+      "Bash(sed -n 55-80p \"c:/Users/zerog/OneDrive/Desktop/LabirintoDoSaber-FrontEnd/src/pages/forgotPassword/style.css\")",
+      "Bash(sed -n 45-65p \"c:/Users/zerog/OneDrive/Desktop/LabirintoDoSaber-FrontEnd/src/pages/resetPassword/style.css\")",
+      "Bash(sed -n '55,80p' \"c:/Users/zerog/OneDrive/Desktop/LabirintoDoSaber-FrontEnd/src/pages/forgotPassword/style.css\")",
+      "Bash(sed -n '45,70p' \"c:/Users/zerog/OneDrive/Desktop/LabirintoDoSaber-FrontEnd/src/pages/resetPassword/style.css\")",
+      "Bash(sed -n '68,80p' \"c:/Users/zerog/OneDrive/Desktop/LabirintoDoSaber-FrontEnd/src/pages/forgotPassword/index.js\")",
+      "Bash(sed -n '81,93p' \"c:/Users/zerog/OneDrive/Desktop/LabirintoDoSaber-FrontEnd/src/pages/resetPassword/index.js\")",
+      "Bash(sed -i '65s/^svg {/.lock-icon svg {/' src/pages/forgotPassword/style.css)",
+      "Bash(sed -i '54s/^svg {/.lock-icon svg {/' src/pages/resetPassword/style.css)",
+      "Bash(node -e ' *)",
+      "Bash(CI=false npx --no-install eslint src/pages/mainReport/index.js src/pages/mainReport/ReportPDF.js src/pages/ReportSession/index.js src/pages/ReportPacient/index.js src/pages/patientsDetails/index.js src/pages/anamneseForm/index.js src/pages/anamneseResponder/index.js src/pages/agenda/index.js src/pages/sessionInit/index.js)",
+      "Bash(git --no-pager diff --stat -- src/pages/ReportSession/index.js)",
+      "Bash(git --no-pager diff -- src/pages/ReportSession/index.js)",
+      "Bash(git push *)"
     ]
   }
 }
