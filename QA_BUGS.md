@@ -18,6 +18,11 @@
 | Tipo de teste | Funcional, Interface e Usabilidade |
 | Total de defeitos | 20 |
 
+> **Legenda — campo "Entrada":** corresponde aos dados efetivamente inseridos/selecionados nos
+> campos da tela ao executar os passos — por exemplo, o nome do paciente buscado, o título de uma
+> questão, a alternativa marcada, o texto de uma observação, a data/horário de um agendamento, etc.
+> Os valores abaixo são **exemplos** e podem ser substituídos por massa de dados equivalente.
+
 ---
 
 ## Índice resumido
@@ -54,7 +59,7 @@
 | **Issue** | BUG-01 |
 | **Caso de Teste** | 1.1 — Criando relatório na aba de relatórios (HU01) |
 | **Passos** | 1. Acessar a aba **Relatórios**. 2. Buscar e selecionar um aluno com sessões. 3. Observar a lista "Prévia das Sessões Incluídas". |
-| **Entrada** | Aluno com sessões contendo respostas corretas e incorretas (ex.: 8/10 acertos). |
+| **Entrada** | Nome buscado: `Maria Silva` · aluna com a sessão `Leitura — Vogais` contendo 10 questões e 8 respostas corretas. |
 | **Resultado Esperado** | Cada sessão exibe a porcentagem de acerto correta (ex.: `80% acerto`). |
 | **Resultado Encontrado** | A porcentagem é exibida como `0% acerto` (ou `100%`) para praticamente todas as sessões. |
 | **Data da execução** | 23/06/2026 |
@@ -78,7 +83,7 @@
 | **Issue** | BUG-02 |
 | **Caso de Teste** | 1.3 — Selecionando outro período de relatório (HU01) |
 | **Passos** | 1. Selecionar um aluno com 6+ sessões. 2. No bloco "Período", clicar em **Últimas 6 sessões**. 3. Conferir a quantidade de sessões na prévia. |
-| **Entrada** | Aluno com pelo menos 6 sessões registradas. |
+| **Entrada** | Nome buscado: `João Pedro` (6 sessões registradas) · botão de período clicado: `Últimas 6 sessões`. |
 | **Resultado Esperado** | A prévia e o relatório consideram as últimas 6 sessões. |
 | **Resultado Encontrado** | Apenas as 3 últimas sessões são consideradas; o badge mostra "3 sessões". |
 | **Data da execução** | 23/06/2026 |
@@ -102,7 +107,7 @@
 | **Issue** | BUG-03 |
 | **Caso de Teste** | 3.2 — Tentando exportar um relatório vazio (HU03) |
 | **Passos** | 1. Selecionar um aluno **sem sessões** (ou período sem sessões). 2. Clicar em **Exportar Relatório em PDF**. |
-| **Entrada** | Aluno/período sem nenhuma sessão. |
+| **Entrada** | Nome buscado: `Lucas Andrade` (nenhuma sessão) · período: `Todas as sessões` · ação: clicar em **Exportar Relatório em PDF**. |
 | **Resultado Esperado** | Exibir o modal "Nenhuma sessão encontrada" e **não** gerar PDF. |
 | **Resultado Encontrado** | O modal de aviso nunca aparece; o fluxo prossegue e gera um PDF vazio / dispara erro de renderização. |
 | **Data da execução** | 23/06/2026 |
@@ -126,7 +131,7 @@
 | **Issue** | BUG-04 |
 | **Caso de Teste** | 3.1 — Exportando um relatório com sucesso (HU03) |
 | **Passos** | 1. Selecionar aluno com sessões. 2. Manter "Métricas de Desempenho" marcado. 3. Exportar o PDF e abrir a seção "Métricas de Desempenho". |
-| **Entrada** | Aluno com, p.ex., 24 acertos de 40 questões. |
+| **Entrada** | Nome buscado: `Maria Silva` (24 acertos em 40 questões) · checkbox `Métricas de Desempenho` marcado · ação: exportar PDF. |
 | **Resultado Esperado** | "24 acertos de 40 questões respondidas". |
 | **Resultado Encontrado** | "40 acertos de 24 questões respondidas" (valores invertidos). |
 | **Data da execução** | 23/06/2026 |
@@ -150,7 +155,7 @@
 | **Issue** | BUG-05 |
 | **Caso de Teste** | 5.1 — Consultar sessão que possui observações (HU05) |
 | **Passos** | 1. Abrir o relatório de uma sessão que possua observação registrada. 2. Rolar até o fim da página. |
-| **Entrada** | Sessão com observação clínica preenchida. |
+| **Entrada** | Sessão `Escrita — Sílabas` cuja observação registrada é: `Paciente demonstrou boa evolução na escrita de sílabas simples.` |
 | **Resultado Esperado** | Bloco "Observações da Sessão" exibe o texto registrado. |
 | **Resultado Encontrado** | O bloco não é exibido quando há observação; só aparece (vazio) quando NÃO há observação. |
 | **Data da execução** | 23/06/2026 |
@@ -174,7 +179,7 @@
 | **Issue** | BUG-06 |
 | **Caso de Teste** | 2.1 — Acessando histórico de relatórios (HU02) |
 | **Passos** | 1. Abrir o relatório do paciente (histórico de sessões). 2. Observar a ordem das sessões listadas. |
-| **Entrada** | Aluno com várias sessões em datas diferentes. |
+| **Entrada** | Nome buscado: `Ana Beatriz` · sessões nas datas `10/03/2026`, `22/04/2026` e `15/05/2026`. |
 | **Resultado Esperado** | Sessões ordenadas da mais recente para a mais antiga. |
 | **Resultado Encontrado** | Sessões ordenadas da mais antiga para a mais recente. |
 | **Data da execução** | 23/06/2026 |
@@ -198,7 +203,7 @@
 | **Issue** | BUG-07 |
 | **Caso de Teste** | 2.1 — Acessando histórico de relatórios (HU02) |
 | **Passos** | 1. Abrir o relatório do paciente. 2. Observar a cor do indicador "Porcentagem de acertos" em "Desempenho Geral". |
-| **Entrada** | Aluno com taxa de acerto > 70% (ex.: 85%). |
+| **Entrada** | Nome buscado: `Ana Beatriz` · desempenho geral de `85%` de acerto. |
 | **Resultado Esperado** | Pílula em verde (`#81C784`) para desempenho acima de 70%. |
 | **Resultado Encontrado** | Pílula sempre laranja (`#FFCC80`), mesmo com 85% ou 100% de acerto. |
 | **Data da execução** | 23/06/2026 |
@@ -222,7 +227,7 @@
 | **Issue** | BUG-08 |
 | **Caso de Teste** | 7.1 — Visualizar paciente que possui documentos anexados (HU07) |
 | **Passos** | 1. Abrir o perfil de um aluno que já possui relatórios gerados. 2. Acessar a aba **Documentos**. |
-| **Entrada** | Aluno com 1+ relatórios pedagógicos no histórico. |
+| **Entrada** | Nome buscado: `Pedro Henrique` (2 relatórios pedagógicos já gerados) · aba acessada: `Documentos`. |
 | **Resultado Esperado** | Listar os relatórios disponíveis para download. |
 | **Resultado Encontrado** | Exibe "Nenhum relatório gerado ainda" mesmo havendo relatórios; quando não há, a lista fica em branco. |
 | **Data da execução** | 23/06/2026 |
@@ -246,7 +251,7 @@
 | **Issue** | BUG-09 |
 | **Caso de Teste** | 9.1 — Visualizar paciente que possui anamneses registradas (HU09) |
 | **Passos** | 1. Abrir o perfil de um aluno com anamnese respondida. 2. Acessar a aba **Anamnese**. 3. Observar perguntas do tipo Múltipla Escolha. |
-| **Entrada** | Anamnese com perguntas de Múltipla Escolha respondidas. |
+| **Entrada** | Nome buscado: `Pedro Henrique` · anamnese com a pergunta de Múltipla Escolha `Qual o nível de comunicação verbal?` e a opção selecionada `Frases completas`. |
 | **Resultado Esperado** | Exibir o texto da opção selecionada. |
 | **Resultado Encontrado** | Exibe sempre "—" para perguntas de Múltipla Escolha. |
 | **Data da execução** | 23/06/2026 |
@@ -270,7 +275,7 @@
 | **Issue** | BUG-10 |
 | **Caso de Teste** | 8.1 — Registrando uma anamnese com sucesso (HU08) |
 | **Passos** | 1. Criar um modelo de anamnese. 2. Marcar "Resposta obrigatória" em uma ou mais perguntas. 3. Salvar e reabrir o modelo. |
-| **Entrada** | Modelo com perguntas marcadas como obrigatórias. |
+| **Entrada** | Título do modelo: `Anamnese Autismo Infantil` · pergunta `Nome completo da criança` (tipo Texto) com **Resposta obrigatória** marcada. |
 | **Resultado Esperado** | As perguntas permanecem obrigatórias após salvar. |
 | **Resultado Encontrado** | Todas as perguntas são salvas como não-obrigatórias; o `required` é perdido. |
 | **Data da execução** | 23/06/2026 |
@@ -294,7 +299,7 @@
 | **Issue** | BUG-11 |
 | **Caso de Teste** | 8.4 — Registrar anamnese com campos obrigatórios não preenchidos (HU08) |
 | **Passos** | 1. Preencher uma anamnese deixando perguntas **obrigatórias** em branco. 2. Clicar em **Salvar**. |
-| **Entrada** | Anamnese com campos obrigatórios vazios. |
+| **Entrada** | Pergunta obrigatória `Queixa principal` deixada **em branco** · demais campos preenchidos · ação: clicar em **Salvar**. |
 | **Resultado Esperado** | Exibir mensagem de erro e impedir o salvamento. |
 | **Resultado Encontrado** | O salvamento prossegue sem validar os campos obrigatórios; a validação recai sobre os campos opcionais. |
 | **Data da execução** | 23/06/2026 |
@@ -318,7 +323,7 @@
 | **Issue** | BUG-12 |
 | **Caso de Teste** | 6.1 — Anexando documentos aceitos (HU06) |
 | **Passos** | 1. Em uma anamnese com pergunta do tipo "Envio de Arquivo", selecionar um arquivo válido. 2. Aguardar o upload concluir. |
-| **Entrada** | Arquivo válido (ex.: PDF/JPG). |
+| **Entrada** | Pergunta `Anexe o laudo médico` · arquivo selecionado: `laudo_neuro.pdf` (formato válido). |
 | **Resultado Esperado** | Exibir o link "Arquivo enviado — ver" e registrar a URL no campo. |
 | **Resultado Encontrado** | O upload conclui, mas o link não aparece e o valor fica indefinido; campos obrigatórios de arquivo falham mesmo após o envio. |
 | **Data da execução** | 23/06/2026 |
@@ -342,7 +347,7 @@
 | **Issue** | BUG-13 |
 | **Caso de Teste** | 10.2 — Tentando agendar sessão em horário inválido (HU10) |
 | **Passos** | 1. Abrir **Novo Agendamento**. 2. Selecionar aluno e data, **sem** informar o horário. 3. Clicar em **Salvar**. |
-| **Entrada** | Aluno + data preenchidos, horário em branco. |
+| **Entrada** | Aluno: `Maria Silva` · Data: `30/06/2026` · Horário: *(deixado em branco)* · ação: clicar em **Salvar**. |
 | **Resultado Esperado** | Mensagem "Informe a data e o horário." e bloqueio do salvamento. |
 | **Resultado Encontrado** | A validação de horário não ocorre; a aplicação tenta montar uma data inválida (`Invalid Date`), causando erro de execução e o botão não responde. |
 | **Data da execução** | 23/06/2026 |
@@ -366,7 +371,7 @@
 | **Issue** | BUG-14 |
 | **Caso de Teste** | 11.1 — Visualizando agenda com sessões agendadas (HU11) |
 | **Passos** | 1. Abrir a **Agenda** em um dia com 2+ sessões. 2. Observar o card "Resumo do Dia". |
-| **Entrada** | Dia com sessões às 09:00 e 16:00. |
+| **Entrada** | Dia `25/06/2026` com sessões agendadas às `09:00` (Maria Silva) e `16:00` (João Pedro). |
 | **Resultado Esperado** | Primeira Sessão = 09:00; Última Sessão = 16:00. |
 | **Resultado Encontrado** | Primeira Sessão = 16:00; Última Sessão = 09:00 (invertidas). |
 | **Data da execução** | 23/06/2026 |
@@ -390,7 +395,7 @@
 | **Issue** | BUG-15 |
 | **Caso de Teste** | 13.2 — Alterando uma resposta com sucesso (HU13) |
 | **Passos** | 1. Iniciar uma sessão de atividade. 2. Selecionar a alternativa A. 3. Tentar trocar para a alternativa B antes de confirmar. |
-| **Entrada** | Atividade de múltipla escolha com 2+ alternativas. |
+| **Entrada** | Atividade `Qual animal começa com a letra G?` · marcar `Gato` e, antes de confirmar, tentar trocar para `Girafa`. |
 | **Resultado Esperado** | A seleção muda livremente entre alternativas até a confirmação. |
 | **Resultado Encontrado** | Após a primeira seleção, não é mais possível trocar de alternativa; a primeira escolha fica travada. |
 | **Data da execução** | 23/06/2026 |
@@ -414,7 +419,7 @@
 | **Issue** | BUG-16 |
 | **Caso de Teste** | 12.1 — Interagindo com uma atividade otimizada (HU12) |
 | **Passos** | 1. Iniciar uma sessão. 2. Responder uma atividade após ~5 segundos. 3. Conferir o tempo registrado no relatório da sessão. |
-| **Entrada** | Resposta confirmada após ~5 segundos. |
+| **Entrada** | Atividade `Selecione a vogal A` · confirmar a resposta aproximadamente `5 segundos` após a abertura da questão. |
 | **Resultado Esperado** | Tempo de resposta ≈ 5 segundos. |
 | **Resultado Encontrado** | Tempo de resposta ≈ 50 segundos (10x maior); métricas de tempo do relatório ficam infladas. |
 | **Data da execução** | 23/06/2026 |
@@ -438,7 +443,7 @@
 | **Issue** | BUG-17 |
 | **Caso de Teste** | 14.1 — Ampliando uma imagem com sucesso (HU14) |
 | **Passos** | 1. Iniciar uma atividade com imagem. 2. Clicar na imagem para ampliar. 3. Clicar na área escura (fora da imagem) para fechar. |
-| **Entrada** | Atividade com imagem. |
+| **Entrada** | Atividade `Identifique a figura` (com imagem) · clicar na imagem para ampliar e depois clicar na área escura externa. |
 | **Resultado Esperado** | Clicar no overlay (fora da imagem) fecha o modal de ampliação. |
 | **Resultado Encontrado** | Clicar na área externa não fecha; o modal só fecha pelo botão de voltar. |
 | **Data da execução** | 23/06/2026 |
@@ -462,7 +467,7 @@
 | **Issue** | BUG-18 |
 | **Caso de Teste** | 4.1 — Registrando observações com sucesso (HU04) |
 | **Passos** | 1. Concluir uma sessão. 2. No modal de encerramento, escrever uma observação. 3. Clicar em **Salvar Observação**. 4. Consultar a observação depois. |
-| **Entrada** | Texto de observação clínica preenchido. |
+| **Entrada** | Campo de observação preenchido com: `Sessão produtiva, paciente colaborativo e atento durante toda a atividade.` |
 | **Resultado Esperado** | Observação salva e disponível na consulta posterior. |
 | **Resultado Encontrado** | A observação não é persistida; ao consultar a sessão, ela não aparece. |
 | **Data da execução** | 23/06/2026 |
@@ -486,7 +491,7 @@
 | **Issue** | BUG-19 |
 | **Caso de Teste** | 12.2 — Garantindo otimização ao trocar a alternativa selecionada (HU12) |
 | **Passos** | 1. Iniciar uma sessão. 2. Selecionar e **confirmar** uma alternativa correta. 3. Observar a cor de destaque da alternativa. |
-| **Entrada** | Resposta correta confirmada. |
+| **Entrada** | Atividade `Quantas vogais tem a palavra ESCOLA?` · marcar e confirmar a alternativa correta `3`. |
 | **Resultado Esperado** | Alternativa correta destacada em verde; incorreta em vermelho. |
 | **Resultado Encontrado** | Alternativa correta destacada em vermelho e incorreta em verde (cores invertidas). |
 | **Data da execução** | 23/06/2026 |
@@ -510,7 +515,7 @@
 | **Issue** | BUG-20 |
 | **Caso de Teste** | 11.1 — Visualizando agenda com sessões agendadas (HU11) |
 | **Passos** | 1. Cancelar/excluir todos os agendamentos de um dia. 2. Observar o mini calendário da agenda. |
-| **Entrada** | Dia em que todos os agendamentos foram cancelados. |
+| **Entrada** | Dia `28/06/2026` com um único agendamento (`Maria Silva`) que foi **cancelado/excluído**. |
 | **Resultado Esperado** | O dia não deve exibir marcador de sessão. |
 | **Resultado Encontrado** | O dia continua marcado no calendário, mesmo sem sessões ativas. |
 | **Data da execução** | 23/06/2026 |
