@@ -42,7 +42,7 @@ function ActivityDetailsPage() {
 
   useEffect(() => {
     if (!activityId) {
-      navigate("/ManageActivities", { replace: true });
+      navigate("/activitiesMain", { replace: true });
       return;
     }
 
@@ -92,7 +92,7 @@ function ActivityDetailsPage() {
       <main className="activity-details-main-content">
         <button
           type="button"
-          onClick={() => navigate("/ManageActivities")}
+          onClick={() => navigate("/activitiesMain")}
           className="activity-details-back-arrow"
           style={{ background: "none", border: "none", cursor: "pointer" }}
         >
@@ -112,7 +112,7 @@ function ActivityDetailsPage() {
               <button
                 type="button"
                 className="activity-details-back-btn"
-                onClick={() => navigate("/ManageActivities")}
+                onClick={() => navigate("/activitiesMain")}
               >
                 Voltar para Atividades
               </button>

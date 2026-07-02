@@ -145,7 +145,7 @@ function NotebookDetailsPage() {
         const fetchData = async () => {
             if (!notebookId) {
                 alert("Erro: ID do caderno não informado.");
-                navigate('/ManageNotebook');
+                navigate('/activitiesMain');
                 return;
             }
 
@@ -247,7 +247,7 @@ function NotebookDetailsPage() {
                     isOpen: true,
                     title: "Caderno Excluído",
                     message: "O caderno foi excluído pois ficou sem grupos.",
-                    onCloseAction: () => navigate('/ManageNotebook')
+                    onCloseAction: () => navigate('/activitiesMain')
                 });
             } 
             // CENÁRIO 2: Atualizar Caderno
@@ -315,9 +315,14 @@ function NotebookDetailsPage() {
             />
 
             <main className="notebook-details-main-content">
-                <a href="/ManageNotebook" className="back-arrow-link">
+                <button
+                    type="button"
+                    className="back-arrow-link"
+                    onClick={() => navigate('/activitiesMain')}
+                    style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+                >
                     <img src={iconArrowLeft} alt="Voltar" className="back-arrow-icon" />
-                </a>
+                </button>
                 <div className="notebook-details-container">
                     <div className="top-container">
                         <h1>Caderno: {notebookName}</h1>
