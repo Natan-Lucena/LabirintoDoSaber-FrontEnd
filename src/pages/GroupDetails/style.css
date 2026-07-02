@@ -1,0 +1,181 @@
+.gd-page {
+  min-height: 100vh;
+  background-color: #f5f6fa;
+}
+
+.gd-content {
+  padding: 2rem 2.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Topbar */
+.gd-topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.gd-back-btn {
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.gd-back-btn:hover {
+  background: #f0f0f0;
+}
+
+.gd-back-btn img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.gd-page-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.gd-page-subtitle {
+  color: #999;
+  font-size: 0.9rem;
+  margin: 2px 0 0;
+}
+
+/* Erro / loading */
+.gd-form-error {
+  background: #fdf2f1;
+  color: #c0392b;
+  border: 1px solid #f0c0bc;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.gd-loading {
+  text-align: center;
+  color: #999;
+  margin-top: 60px;
+  font-size: 0.95rem;
+}
+
+/* Seções */
+.gd-section {
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.gd-section-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px;
+}
+
+.gd-info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.gd-info-tag {
+  background: #D8F5F3;
+  color: #008D85;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 5px 14px;
+}
+
+.gd-info-count {
+  font-size: 0.88rem;
+  color: #999;
+  font-weight: 600;
+}
+
+/* Lista de atividades */
+.gd-tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gd-task-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fafafa;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Nunito', sans-serif;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.gd-task-card:hover {
+  border-color: #63e9e2;
+  box-shadow: 0 0 0 3px rgba(99, 233, 226, 0.15);
+}
+
+.gd-task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.gd-task-prompt {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gd-task-meta {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.gd-task-arrow {
+  font-size: 1.3rem;
+  color: #bbb;
+  flex-shrink: 0;
+}
+
+/* Empty */
+.gd-empty {
+  text-align: center;
+  padding: 30px 0;
+  color: #999;
+}
+
+.gd-empty p {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin: 0;
+  color: #666;
+}
