@@ -4,330 +4,263 @@ import "./styles.css";
 import iconBack from "../../assets/images/seta_icon_esquerda.png";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/ui/NavBar/index.js";
-const ActivityChip = ({ label, isSelected, onClick }) => (
-  <button
-    className={`activity-chip ${isSelected ? "selected" : ""}`}
-    onClick={onClick}
-    type="button"
-  >
-    {label}
-  </button>
-);
 
-const TrashIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+const CATEGORIES = [
+  { label: "Leitura", value: "reading" },
+  { label: "Escrita", value: "writing" },
+  { label: "Vocabulário", value: "vocabulary" },
+  { label: "Compreensão", value: "comprehension" },
+];
+
+const categoryMap = {
+  reading: "Leitura",
+  writing: "Escrita",
+  vocabulary: "Vocabulário",
+  comprehension: "Compreensão",
+};
+
+const BookIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      d="M5 6H19L18.1245 19.133C18.0544 20.1836 17.1818 21 16.1289 21H7.87111C6.81818 21 5.94558 20.1836 5.87554 19.133L5 6Z"
-      stroke="black"
-      strokeWidth="2"
-    />
-    <path
-      d="M9 6V3H15V6"
-      stroke="black"
-      strokeWidth="2"
+      d="M12 6C12 6 10 4.5 6.5 4.5C4.5 4.5 3 5 3 5V19C3 19 4.5 18.5 6.5 18.5C10 18.5 12 20 12 20M12 6C12 6 14 4.5 17.5 4.5C19.5 4.5 21 5 21 5V19C21 19 19.5 18.5 17.5 18.5C14 18.5 12 20 12 20M12 6V20"
+      stroke="#008D85"
+      strokeWidth="1.8"
+      strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M3 6H21" stroke="black" strokeWidth="2" strokeLinecap="round" />
-    <path d="M10 10V17" stroke="black" strokeWidth="2" strokeLinecap="round" />
-    <path d="M14 10V17" stroke="black" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
-const AddIcon = () => (
-  <svg
-    width="29"
-    height="31"
-    viewBox="0 0 29 31"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g filter="url(#filter0_d_150_1802)">
-      <path d="M19.5 12H9.5" stroke="black" strokeLinecap="round" />
-      <path d="M14.5 17V7" stroke="black" strokeLinecap="round" />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M14.5 22C20.0228 22 24.5 17.5228 24.5 12C24.5 6.47715 20.0228 2 14.5 2C8.97715 2 4.5 6.47715 4.5 12C4.5 17.5228 8.97715 22 14.5 22Z"
-        stroke="black"
-      />
-    </g>
-    <defs>
-      <filter
-        id="filter0_d_150_1802"
-        x="-1.5"
-        y="0"
-        width="32"
-        height="32"
-        filterUnits="userSpaceOnUse"
-        colorInterpolationFilters="sRGB"
-      >
-        <feFlood floodOpacity="0" result="BackgroundImageFix" />
-        <feColorMatrix
-          in="SourceAlpha"
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          result="hardAlpha"
-        />
-        <feOffset dy="4" />
-        <feGaussianBlur stdDeviation="2" />
-        <feComposite in2="hardAlpha" operator="out" />
-        <feColorMatrix
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-        />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow_150_1802"
-        />
-        <feBlend
-          mode="normal"
-          in="SourceGraphic"
-          in2="effect1_dropShadow_150_1802"
-          result="shape"
-        />
-      </filter>
-    </defs>
+const FolderIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7.5H19C20.1046 7.5 21 8.39543 21 9.5V17C21 18.1046 20.1046 19 19 19H5C3.89543 19 3 18.1046 3 17V7Z"
+      stroke="#008D85"
+      strokeWidth="1.8"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-function AdicionarAtividade() {
+function AddNotebookPage() {
   const navigate = useNavigate();
 
-  const [selectedCategory, setSelectedCategory] = useState("Leitura");
   const [description, setDescription] = useState("");
-
-  const [availableTaskGroups, setAvailableTaskGroups] = useState([]);
-  const [notebookGroups, setNotebookGroups] = useState([
-    { uniqueId: Date.now(), groupId: "" },
-  ]);
-
-  const categories = ["Leitura", "Escrita", "Vocabulário", "Compreensão"];
-
-  const categoryMap = {
-    Leitura: "reading",
-    Escrita: "writing",
-    Vocabulário: "vocabulary",
-    Compreensão: "comprehension",
-  };
+  const [selectedCategory, setSelectedCategory] = useState("reading");
+  const [availableGroups, setAvailableGroups] = useState([]);
+  const [selectedGroupIds, setSelectedGroupIds] = useState([]);
+  const [loadingGroups, setLoadingGroups] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     const fetchGroups = async () => {
       const token = localStorage.getItem("authToken");
-      if (!token) return;
+      if (!token) {
+        navigate("/");
+        return;
+      }
 
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/task-group/list-by-educator`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
+          `${API_BASE_URL}/task-group/list-by-educator`,
+          { headers: { Authorization: `Bearer ${token}` } },
         );
-
-        console.log("Grupos carregados:", response.data);
-
         if (Array.isArray(response.data)) {
-          setAvailableTaskGroups(response.data);
+          setAvailableGroups(response.data);
         }
       } catch (error) {
         console.error("Erro ao carregar grupos de atividades:", error);
+        setErrorMsg("Erro ao carregar os grupos de atividades.");
+      } finally {
+        setLoadingGroups(false);
       }
     };
     fetchGroups();
-  }, []);
+  }, [navigate]);
 
-  const addGroupRow = () => {
-    setNotebookGroups([
-      ...notebookGroups,
-      { uniqueId: Date.now(), groupId: "" },
-    ]);
-  };
-
-  const removeGroupRow = (uniqueId) => {
-    if (notebookGroups.length > 1) {
-      setNotebookGroups(
-        notebookGroups.filter((item) => item.uniqueId !== uniqueId)
-      );
-    }
-  };
-
-  const updateGroupSelection = (uniqueId, newGroupId) => {
-    setNotebookGroups(
-      notebookGroups.map((item) =>
-        item.uniqueId === uniqueId ? { ...item, groupId: newGroupId } : item
-      )
+  const toggleGroup = (groupId) => {
+    setSelectedGroupIds((prev) =>
+      prev.includes(groupId)
+        ? prev.filter((id) => id !== groupId)
+        : [...prev, groupId],
     );
   };
 
   const handleSave = async () => {
-    const token = localStorage.getItem("authToken");
-
-    const validGroupIds = notebookGroups
-      .map((item) => item.groupId)
-      .filter((id) => id !== "");
+    setErrorMsg("");
 
     if (!description.trim()) {
-      alert("Por favor, preencha a descrição do caderno.");
+      setErrorMsg("Preencha a descrição do caderno.");
       return;
     }
-    if (validGroupIds.length === 0) {
-      alert("Selecione pelo menos um grupo de atividades.");
+    if (selectedGroupIds.length === 0) {
+      setErrorMsg("Selecione pelo menos um grupo de atividades.");
       return;
     }
 
-    let aggregatedTaskIds = [];
-
-    validGroupIds.forEach((groupId) => {
-      const groupObj = availableTaskGroups.find((g) => g.id === groupId);
-      if (groupObj && groupObj.tasksIds && Array.isArray(groupObj.tasksIds)) {
-        aggregatedTaskIds = [...aggregatedTaskIds, ...groupObj.tasksIds];
-      }
+    // Agrega os ids de tasks de todos os grupos selecionados (sem duplicatas)
+    const aggregatedTaskIds = selectedGroupIds.flatMap((groupId) => {
+      const group = availableGroups.find((g) => g.id === groupId);
+      return Array.isArray(group?.tasksIds) ? group.tasksIds : [];
     });
-
     const uniqueTaskIds = [...new Set(aggregatedTaskIds)];
 
     const payload = {
       tasks: uniqueTaskIds,
-      category: categoryMap[selectedCategory] || "vocabulary",
-      description: description,
-      taskGroupsIds: validGroupIds,
+      category: selectedCategory,
+      description: description.trim(),
+      taskGroupsIds: selectedGroupIds,
     };
 
-    console.log("Enviando Payload:", payload);
-
+    setSaving(true);
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/task-notebook/create`,
-        payload,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      console.log("Resposta da API:", response.data);
-      alert("Caderno criado com sucesso!");
+      const token = localStorage.getItem("authToken");
+      await axios.post(`${API_BASE_URL}/task-notebook/create`, payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       navigate("/activitiesMain");
     } catch (error) {
       console.error("Erro ao criar caderno:", error);
-      alert("Erro ao criar o caderno. Verifique os dados e tente novamente.");
+      if (error.response?.status === 401) {
+        setErrorMsg("Sessão expirada. Faça login novamente.");
+      } else {
+        setErrorMsg("Erro ao criar o caderno. Verifique os dados e tente novamente.");
+      }
+    } finally {
+      setSaving(false);
     }
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="nb-page">
       <Navbar activePage="activities" />
 
-      <main className="main-content">
-        <button
-          onClick={() => navigate("/activitiesMain")}
-          className="back-arrow"
-          style={{ background: "none", border: "none", cursor: "pointer" }}
-        >
-          <img src={iconBack} alt="seta" className="seta" />
-        </button>
-
-        <div className="adicionar-atividade-container">
-          <h1 className="form-title">Adicionar novo caderno</h1>
-          <hr className="title-separator" />
-
-          {/* Categoria */}
-          <div className="form-group">
-            <label className="form-label required">Categoria do caderno</label>
-            <div className="chips-container">
-              {categories.map((cat) => (
-                <ActivityChip
-                  key={cat}
-                  label={cat}
-                  isSelected={selectedCategory === cat}
-                  onClick={() => setSelectedCategory(cat)}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label className="form-label required">Descrição do caderno</label>
-            <input
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Exemplo: Caderno de associação e leitura com animais"
-              className="text-input"
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label required">
-              Adicione os grupos de atividades
-            </label>
-
-            <div className="activities-list-container">
-              {notebookGroups.map((item) => (
-                <div key={item.uniqueId} className="activity-row">
-                  <div className="activity-item">
-                    <select
-                      className="activity-input"
-                      value={item.groupId}
-                      onChange={(e) =>
-                        updateGroupSelection(item.uniqueId, e.target.value)
-                      }
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        border: "none",
-                        background: "transparent",
-                        outline: "none",
-                      }}
-                    >
-                      <option value="">Selecione um grupo...</option>
-
-                      {availableTaskGroups.map((group) => (
-                        <option key={group.id} value={group.id}>
-                          {group.name
-                            ? group.name
-                            : `Grupo - ${group.category}`}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <button
-                    type="button"
-                    className="activity-remove-button"
-                    onClick={() => removeGroupRow(item.uniqueId)}
-                    title="Remover grupo"
-                  >
-                    <TrashIcon />
-                  </button>
-                </div>
-              ))}
-            </div>
-
-            <button
-              type="button"
-              className="activity-add-button"
-              onClick={addGroupRow}
-            >
-              <AddIcon />
-              Adicionar mais grupos
-            </button>
-          </div>
-
-          <div className="next-button-container">
-            <button className="button-next" type="button" onClick={handleSave}>
-              Salvar Caderno
-            </button>
+      <div className="nb-content">
+        {/* Topbar */}
+        <div className="nb-topbar">
+          <button className="nb-back-btn" onClick={() => navigate("/activitiesMain")}>
+            <img src={iconBack} alt="Voltar" />
+          </button>
+          <div>
+            <h1 className="nb-page-title">Criar novo caderno</h1>
+            <p className="nb-page-subtitle">
+              Organize suas atividades em cadernos temáticos
+            </p>
           </div>
         </div>
-      </main>
+
+        {errorMsg && <div className="nb-form-error">{errorMsg}</div>}
+
+        {/* Informações do caderno */}
+        <div className="nb-section">
+          <h2 className="nb-section-title">
+            <BookIcon />
+            Informações do Caderno
+          </h2>
+          <div className="nb-field">
+            <label className="nb-label">
+              Descrição do Caderno <span className="nb-required">*</span>
+            </label>
+            <textarea
+              className="nb-form-textarea"
+              placeholder="Ex: Alfabetização Divertida — atividades de reconhecimento de letras e sons"
+              value={description}
+              rows={3}
+              maxLength={500}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+        </div>
+
+        {/* Categoria */}
+        <div className="nb-section">
+          <h2 className="nb-section-title">
+            Categoria <span className="nb-required">*</span>
+          </h2>
+          <p className="nb-section-hint">Selecione a categoria deste caderno</p>
+          <div className="nb-categories">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.value}
+                type="button"
+                className={`nb-category-chip ${selectedCategory === cat.value ? "selected" : ""}`}
+                onClick={() => setSelectedCategory(cat.value)}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Grupos de atividades */}
+        <div className="nb-section">
+          <div className="nb-groups-header">
+            <div>
+              <h2 className="nb-section-title">Grupos de Atividades</h2>
+              <p className="nb-section-hint">
+                Selecione grupos existentes ou crie novos
+              </p>
+            </div>
+            <button
+              className="nb-create-group-btn"
+              onClick={() => navigate("/GroupActivities")}
+            >
+              + Criar Grupo
+            </button>
+          </div>
+
+          {loadingGroups ? (
+            <p className="nb-groups-loading">Carregando grupos...</p>
+          ) : availableGroups.length === 0 ? (
+            <div className="nb-groups-empty">
+              <p>Nenhum grupo de atividades encontrado</p>
+              <span>Clique em "Criar Grupo" para montar o primeiro</span>
+            </div>
+          ) : (
+            <div className="nb-groups-grid">
+              {availableGroups.map((group) => (
+                <button
+                  key={group.id}
+                  type="button"
+                  className={`nb-group-card ${selectedGroupIds.includes(group.id) ? "selected" : ""}`}
+                  onClick={() => toggleGroup(group.id)}
+                >
+                  <FolderIcon />
+                  <span className="nb-group-info">
+                    <span className="nb-group-name">
+                      {group.name || `Grupo - ${categoryMap[group.category] || group.category}`}
+                    </span>
+                    <span className="nb-group-desc">
+                      {group.tasksIds?.length > 0
+                        ? `${group.tasksIds.length} atividade(s) · ${categoryMap[group.category] || group.category}`
+                        : categoryMap[group.category] || group.category}
+                    </span>
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Ações */}
+        <div className="nb-actions">
+          <button
+            className="nb-cancel-btn"
+            onClick={() => navigate("/activitiesMain")}
+            disabled={saving}
+          >
+            Cancelar
+          </button>
+          <button className="nb-save-btn" onClick={handleSave} disabled={saving}>
+            {saving ? "Criando..." : "Criar Caderno"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
 
-export default AdicionarAtividade;
+export default AddNotebookPage;

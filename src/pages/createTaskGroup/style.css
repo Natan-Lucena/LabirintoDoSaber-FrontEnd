@@ -1,0 +1,644 @@
+.tg-page {
+  min-height: 100vh;
+  background-color: #f5f6fa;
+}
+
+.tg-content {
+  padding: 2rem 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Topbar */
+.tg-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.tg-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tg-back-btn {
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: background 0.15s;
+}
+
+.tg-back-btn:hover {
+  background: #f0f0f0;
+}
+
+.tg-back-btn img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.tg-page-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.tg-save-btn {
+  background-color: #7DD4C7;
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.tg-save-btn:hover:not(:disabled) {
+  background-color: #5bbfb1;
+}
+
+.tg-save-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.tg-save-btn img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* Erro */
+.tg-form-error {
+  background: #fdf2f1;
+  color: #c0392b;
+  border: 1px solid #f0c0bc;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+/* Seções */
+.tg-section {
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.tg-section-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 20px;
+}
+
+.tg-field {
+  margin-bottom: 4px;
+}
+
+.tg-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.tg-form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.93rem;
+  font-family: 'Nunito', sans-serif;
+  outline: none;
+  box-sizing: border-box;
+  background: #fff;
+  transition: border-color 0.15s;
+}
+
+.tg-form-input:focus {
+  border-color: #63e9e2;
+}
+
+.tg-form-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.93rem;
+  outline: none;
+  box-sizing: border-box;
+  resize: vertical;
+  background: #fff;
+  font-family: 'Nunito', sans-serif;
+  transition: border-color 0.15s;
+}
+
+.tg-form-textarea:focus {
+  border-color: #63e9e2;
+}
+
+/* Tiles de categoria */
+.tg-categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 800px) {
+  .tg-categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.tg-category-tile {
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 16px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.tg-category-tile:hover {
+  transform: translateY(-2px);
+}
+
+.tg-category-tile.selected {
+  border-color: #63e9e2;
+  box-shadow: 0 0 0 3px rgba(99, 233, 226, 0.25);
+}
+
+.tg-category-icon {
+  font-size: 1.3rem;
+}
+
+.tg-category-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #444;
+}
+
+.tg-category-tile.selected .tg-category-label {
+  color: #008D85;
+}
+
+/* Header de perguntas */
+.tg-questions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.tg-questions-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tg-ai-btn {
+  background: #fff;
+  color: #008D85;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 1.5px solid #7DD4C7;
+  border-radius: 20px;
+  padding: 9px 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: background-color 0.2s;
+}
+
+.tg-ai-btn:hover {
+  background-color: #F3FBFB;
+}
+
+.tg-add-task-btn {
+  background-color: #7DD4C7;
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 20px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tg-add-task-btn:hover {
+  background-color: #5bbfb1;
+}
+
+/* Empty state */
+.tg-questions-empty {
+  text-align: center;
+  padding: 40px 0;
+  color: #999;
+}
+
+.tg-questions-empty p {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: #666;
+}
+
+.tg-questions-empty span {
+  font-size: 0.85rem;
+}
+
+/* Cards de pergunta */
+.tg-questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tg-question-card {
+  border: 1.5px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 18px 20px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: opacity 0.15s;
+}
+
+.tg-question-card--excluded {
+  opacity: 0.5;
+}
+
+.tg-question-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tg-question-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #555;
+}
+
+.tg-ai-badge {
+  background: #D8F5F3;
+  color: #008D85;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 3px 10px;
+}
+
+.tg-question-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+
+.tg-include-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #555;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tg-include-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #63e9e2;
+}
+
+.tg-remove-task-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s;
+}
+
+.tg-remove-task-btn:hover {
+  background: #fdf2f1;
+}
+
+.tg-remove-task-btn img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: invert(30%) sepia(80%) saturate(600%) hue-rotate(320deg);
+}
+
+/* Alternativas */
+.tg-alternatives-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tg-alternatives-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tg-alternative-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tg-alternative-row input[type="radio"] {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  accent-color: #63e9e2;
+  flex-shrink: 0;
+}
+
+.tg-alternative-input {
+  flex: 1;
+}
+
+.tg-remove-alt-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.tg-remove-alt-btn:hover {
+  background: #fdf2f1;
+}
+
+.tg-remove-alt-btn img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  filter: invert(30%) sepia(80%) saturate(600%) hue-rotate(320deg);
+}
+
+.tg-add-alt-btn {
+  background: none;
+  border: none;
+  color: #008d85;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+  text-align: left;
+  transition: color 0.15s;
+}
+
+.tg-add-alt-btn:hover {
+  color: #63e9e2;
+}
+
+/* Mídia */
+.tg-media-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tg-media-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tg-media-upload-btn {
+  background: #fff;
+  border: 1.5px dashed #ccc;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.tg-media-upload-btn:hover {
+  border-color: #63e9e2;
+  color: #008D85;
+}
+
+.tg-media-badge {
+  background: #D8F5F3;
+  color: #008D85;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tg-media-badge button {
+  background: none;
+  border: none;
+  color: #008D85;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ── Modal Assistente de IA ── */
+.tg-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.tg-modal-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  font-family: 'Nunito', sans-serif;
+}
+
+.tg-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.tg-modal-icon {
+  background: #7DD4C7;
+  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tg-modal-header-text {
+  flex: 1;
+}
+
+.tg-modal-header-text h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.tg-modal-header-text p {
+  font-size: 0.85rem;
+  color: #999;
+  margin: 2px 0 0;
+}
+
+.tg-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.tg-modal-close:hover {
+  color: #555;
+}
+
+.tg-modal-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #555;
+  margin: 18px 0 8px;
+}
+
+/* Stepper de quantidade */
+.tg-stepper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tg-stepper-btn {
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #555;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s;
+}
+
+.tg-stepper-btn:hover:not(:disabled) {
+  border-color: #63e9e2;
+}
+
+.tg-stepper-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.tg-stepper-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  min-width: 28px;
+  text-align: center;
+}
+
+/* Botão de geração */
+.tg-modal-generate-btn {
+  background-color: #7DD4C7;
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 14px;
+  padding: 13px;
+  width: 100%;
+  margin-top: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.tg-modal-generate-btn:hover:not(:disabled) {
+  background-color: #5bbfb1;
+}
+
+.tg-modal-generate-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

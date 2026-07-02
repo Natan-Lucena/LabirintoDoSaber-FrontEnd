@@ -1,397 +1,331 @@
-
-.alunos-main-content {
-  flex: 1;
-  display: flex;
-  justify-content: center; 
-  padding: 2.5rem;
-  background-color: #fcfcff; 
-
-
+.atv-page {
+  min-height: 100vh;
+  background-color: #f5f6fa;
 }
 
-.alunos-container {
-
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-
-  
+.atv-content {
+  padding: 2rem 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.alunos-container h1 {
+/* Header */
+.atv-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.atv-title {
   font-family: 'Nunito', sans-serif;
-  font-size: 2.25rem;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  color: #111;
-}
-
-.alunos-container .subtitle {
-  color: #777;
-  font-size: 1.1rem;
-  margin-top: 0;
-  margin-bottom: 2.5rem;
-}
-
-
-.student-card-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem; 
-  margin-left: 15px;
-}
-
-
-.student-list-item-card {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 24px; 
-  padding: 1.5rem 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease-in-out;
-}
-
-.student-list-item-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-}
-
-
-.student-card-info {
-  flex: 1; 
-}
-
-.student-card-info h3 {
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #333;
-  margin: 0 0 0.25rem 0;
-}
-
-.student-card-info p {
-  font-family: 'Nunito', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1a1a1a;
   margin: 0;
-  color: #666;
-  font-size: 1rem;
-  line-height: 1.4;
 }
 
-
-.edit-profile-btn {
-  background-color: #FFF6D8;
-  color: #5c5c5c; 
-  padding: 0.75rem 1.5rem;
-  border-radius: 20px;
-  border: none;
-  font-size: 0.9rem;
-  font-weight: 600;
-  font-family: 'Nunito', sans-serif;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-left: auto; 
-}
-
-.edit-profile-btn:hover {
-  background-color: #f7e9b0;
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
-}
-
-
-.pagination-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3rem; 
-  gap: 0.5rem;
-}
-
-.page-arrow,
-.page-number {
-  text-decoration: none;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 600;
-  font-size: 1.1rem;
+.atv-subtitle {
   color: #999;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  transition: all 0.2s;
+  font-size: 0.95rem;
+  margin: 4px 0 0;
 }
 
-.page-arrow {
-  font-size: 1.3rem;
+/* Botão criar novo conteúdo */
+.atv-create-wrapper {
+  position: relative;
+}
+
+.atv-create-btn {
+  background-color: #D8F5F3;
+  color: #1a1a1a;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.2s;
+}
+
+.atv-create-btn:hover {
+  background-color: #c0eeeb;
+}
+
+.atv-create-plus {
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.atv-create-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  min-width: 230px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.atv-create-menu button {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+  padding: 12px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.atv-create-menu button:last-child {
+  border-bottom: none;
+}
+
+.atv-create-menu button:hover {
+  background-color: #F3FBFB;
+  color: #008D85;
+}
+
+/* Busca */
+.atv-search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border-radius: 24px;
+  padding: 13px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.atv-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  color: #333;
+  background: transparent;
+}
+
+.atv-search-input::placeholder {
   color: #aaa;
 }
 
-.page-number:hover {
-  background-color: #f0f0f0;
+/* Chips de filtro */
+.atv-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.atv-filter-chip {
+  background: #fff;
+  border: 1.5px solid #e6e6e6;
+  border-radius: 20px;
+  padding: 9px 22px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
   color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.page-number.active {
-  background-color: #D8F5F3; 
-  color: #008D85; 
+.atv-filter-chip:hover {
+  border-color: #63e9e2;
 }
 
-
-
-
-body {
-  margin: 0;
-  font-family: -apple-system, 'Nunito', sans-serif;
-  background-color: #fcfcff; 
-  color: #333;
+.atv-filter-chip.active {
+  background-color: #7DD4C7;
+  border-color: #7DD4C7;
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(125, 212, 199, 0.4);
 }
 
-.dashboard-container {
+/* Grid de cards */
+.atv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+@media (max-width: 1000px) {
+  .atv-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .atv-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.atv-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  transition: transform 0.15s, box-shadow 0.15s;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2.5rem;
-  background-color: #fff;
-  border-bottom: 1px solid #eaeaea;
+.atv-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
-.logo {
-  width: 150px;
-  height: 70px;
- object-fit: contain;
-}
-
-.navbar {
-  display: flex;
-  gap: 2rem;
-  margin-left: -10%; 
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #555;
-  font-weight: 600;
-  font-size: 20px;
-  padding-bottom: 4px;
-  margin-left: 10%;
-}
-
-.nav-link.active {
-  color: #63E9E2; 
-  border-bottom: 3px solid #63E9E2;
-}
-
-.user-controls {
+.atv-card-header {
+  height: 72px;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: center;
 }
 
-.icon {
-  height: 41px;
-  width: 48px;
-  cursor: pointer;
-  object-fit: contain;
-}
-
-.profile-icon {
-  border-radius: 50%;
-  background-color: #333; 
-  height: 59px;
-  width: 59px;
-}
-
-.create-caderno{
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  
-  transition: background-color 0.2s;
-  background-color: #D8F5F3;
-  font-family: Nunito;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
-  width: 200px; /* Mantém a largura fixa do botão */
-  margin-right: 20px;
-  
+.atv-card-icon {
+  background: #fff;
+  border-radius: 10px;
+  width: 38px;
+  height: 38px;
   display: flex;
-  justify-content: space-between; /* <-- Isso empurra o texto para esquerda e seta para direita */
   align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
-.create-caderno span {
-    font-size: 22px; /* Altere este valor para o tamanho desejado da fonte */
-    line-height: 1;
-    color: #333; /* Cor do texto, se necessário */
-}
-
-.top-container-head{
+.atv-card-body {
+  padding: 16px 18px 18px;
   display: flex;
-  align-items: center;        
-  margin-bottom: 50px; 
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
 }
 
-.seta-main{
-    width: 24px; 
-    height: 24px;
-}
-
-.bnt-details{
-  padding: 1px;
-  border: none;
-  border-radius: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.2s;
-  background-color: #D8F5F3;
-  font-family: Nunito;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
-  width: 425px;
-  height: 20px;
-  margin-right: 20px;
-  margin-top: 5px;
-}
-
-.caderno-avatar{
-  margin-right: 50px;
-  width: 70px;
-  height: 70px;
-}
-
-/* Container para posicionar o dropdown */
-.dropdown-button-container {
-    position: relative;
-    display: inline-block;
-    width: 200px; /* Para manter o alinhamento com o .create-caderno */
-    margin-right: 100px; /* Para manter o espaçamento entre os botões */
-}
-
-/* O botão base (Criar/Gerenciar) */
-.create-caderno.dropdown-toggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Manter os estilos de .create-caderno */
-}
-
-/* Menu Dropdown - Estilo da Caixa */
-.dropdown-menu {
-    position: absolute;
-    top: 100%; /* Posiciona abaixo do botão */
-    left: 0;
-    z-index: 10; /* Garante que fique acima de outros elementos */
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    min-width: 250px; /* Largura mínima para as opções */
-    display: flex;
-    flex-direction: column;
-    margin-top: 5px; /* Pequeno espaçamento do botão */
-}
-
-/* Links dentro do Dropdown */
-.dropdown-menu a {
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #333;
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.15s;
-    border-bottom: 1px solid #eee; /* Separador entre as opções */
-}
-
-.dropdown-menu a:last-child {
-    border-bottom: none; /* Remove a borda do último item */
-}
-
-.dropdown-menu a:hover {
-    background-color: #f0f8ff; /* Cor ao passar o mouse */
-    color: #008D85;
-}
-
-.dropdown-arrow {
-    width: 32px;
-    height: 32px;
-}
-
-/* Seções da página de atividades */
-.activities-section {
-  margin-bottom: 2.5rem;
-}
-
-.activities-section-title {
+.atv-card-title {
   font-family: 'Nunito', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #333;
-  margin: 0 0 1rem 15px;
-  padding-bottom: 0.4rem;
-  border-bottom: 2px solid #D8F5F3;
-  display: inline-block;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.activities-empty-text {
+.atv-card-desc {
+  font-size: 0.85rem;
   color: #999;
-  font-family: 'Nunito', sans-serif;
-  margin-left: 15px;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.activities-toggle-btn {
-  margin-top: 1rem;
-  margin-left: 15px;
-  background: none;
-  border: none;
+.atv-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.atv-card-tag {
+  background: #f0f2f5;
+  color: #555;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 3px 10px;
+}
+
+.atv-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.atv-card-type {
+  font-size: 0.8rem;
+  color: #aaa;
+  font-weight: 600;
+}
+
+.atv-card-details-btn {
+  background-color: #D8F5F3;
   color: #008D85;
   font-family: 'Nunito', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 16px;
+  padding: 8px 18px;
   cursor: pointer;
-  padding: 0;
+  transition: background-color 0.2s;
 }
 
-.activities-toggle-btn:hover {
-  text-decoration: underline;
+.atv-card-details-btn:hover {
+  background-color: #c0eeeb;
+}
+
+/* Empty state */
+.atv-empty {
+  text-align: center;
+  padding: 60px 0;
+  color: #999;
+}
+
+.atv-empty p {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #666;
+  margin: 0 0 6px;
+}
+
+.atv-empty span {
+  font-size: 0.88rem;
 }
 
 /* Skeleton */
-.skeleton-card {
+.atv-card-skeleton {
   pointer-events: none;
 }
 
-.skeleton {
+.atv-skeleton {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
-  animation: shimmer 1.4s infinite;
+  animation: atv-shimmer 1.4s infinite;
   border-radius: 8px;
 }
 
-.skeleton-avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  margin-right: 50px;
-  flex-shrink: 0;
+.atv-skeleton-header {
+  height: 72px;
+  border-radius: 0;
 }
 
-.skeleton-text {
-  height: 18px;
-  border-radius: 4px;
+.atv-skeleton-text {
+  height: 16px;
+  margin-bottom: 10px;
 }
 
-@keyframes shimmer {
+@keyframes atv-shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
-

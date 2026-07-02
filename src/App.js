@@ -11,10 +11,11 @@ import CreateActivitiePage from "./pages/CreateNewActivitie";
 import ActivitiePersonalizePage from "./pages/NewActivitiePersonalize";
 import ActivitiesMain from "./pages/mainActivities/index.js";
 import AddNotebook from "./pages/addNotebook/index.js";
-import GroupActivitiesPage from "./pages/GroupActivities";
+import CreateTaskGroupPage from "./pages/createTaskGroup";
 import ManageActivitiesPage from "./pages/ManageActivities";
 import ActivityDetailsPage from "./pages/ActivityDetails";
 import ManageGroupPage from "./pages/ManageGroup";
+import GroupDetailsPage from "./pages/GroupDetails";
 import ManageNotebookPage from "./pages/ManageNotebook";
 import NotebookDetailsPage from "./pages/NotebookDetails";
 import GroupSelectPage from "./pages/GroupSelect";
@@ -53,10 +54,11 @@ function App() {
         />
         <Route path="/activitiesMain" element={<ActivitiesMain />} />
         <Route path="/addNotebook" element={<AddNotebook />} />
-        <Route path="/GroupActivities" element={<GroupActivitiesPage />} />
+        <Route path="/GroupActivities" element={<CreateTaskGroupPage />} />
         <Route path="/ManageActivities" element={<ManageActivitiesPage />} />
         <Route path="/activityDetails" element={<ActivityDetailsPage />} />
         <Route path="/ManageGroup" element={<ManageGroupPage />} />
+        <Route path="/GroupDetails" element={<GroupDetailsPage />} />
         <Route path="/ManageNotebook" element={<ManageNotebookPage />} />
         <Route path="/NotebookDetails" element={<NotebookDetailsPage />} />
         <Route path="/GroupSelect" element={<GroupSelectPage />} />
