@@ -48,6 +48,7 @@ function MainReport() {
   const [includeMetrics, setIncludeMetrics] = useState(true);
   const [includeObservations, setIncludeObservations] = useState(true);
   const [includeAnamnese, setIncludeAnamnese] = useState(false);
+  const [includeAiAnalysis, setIncludeAiAnalysis] = useState(false);
   const [exportingPDF, setExportingPDF] = useState(false);
   const [showNoSessionsModal, setShowNoSessionsModal] = useState(false);
 
@@ -217,10 +218,12 @@ function MainReport() {
         console.warn("Dica: Se retornar 404, verifique o nome exato do endpoint de criação de histórico/snapshots no back-end.");
       }
 
+      const anamneseTemplateId = localStorage.getItem(`anamnese_template_${selectedStudent.id}`);
+
       let anamneseData = null;
       if (includeAnamnese) {
         try {
-          const templateId = localStorage.getItem(`anamnese_template_${selectedStudent.id}`);
+          const templateId = anamneseTemplateId;
           if (templateId) {
             const [templateRes, responsesRes] = await Promise.all([
               axios.get(`${API_BASE_URL}/anamnese/templates/${templateId}`, { headers }),
@@ -235,6 +238,25 @@ function MainReport() {
         }
       }
 
+      let aiAnalysis = null;
+      if (includeAiAnalysis) {
+        try {
+          // Mesmos filtros de período do relatório; templateId inclui a anamnese na análise
+          const aiParams = { ...filterData };
+          if (includeAnamnese && anamneseTemplateId) {
+            aiParams.templateId = anamneseTemplateId;
+          }
+          const aiRes = await axios.get(
+            `${API_BASE_URL}/task-notebook-session/analysis/student/${selectedStudent.id}/ai`,
+            { headers, params: aiParams },
+          );
+          aiAnalysis = aiRes.data?.analysis || null;
+        } catch (err) {
+          console.error("Erro ao gerar análise por IA:", err);
+          alert("Não foi possível gerar a análise por IA. O PDF será exportado sem essa seção.");
+        }
+      }
+
       try {
         const blob = await pdf(
           <ReportPDF
@@ -245,6 +267,8 @@ function MainReport() {
             includeObservations={includeObservations}
             includeAnamnese={includeAnamnese}
             anamneseData={anamneseData}
+            includeAiAnalysis={includeAiAnalysis}
+            aiAnalysis={aiAnalysis}
           />
         ).toBlob();
         const url = URL.createObjectURL(blob);
@@ -503,6 +527,22 @@ function MainReport() {
                     <p className="checkbox-description">Informações gerais, histórico médico e desenvolvimento do aluno</p>
                   </div>
                 </li>
+                <li className="checkbox-row">
+                  <input
+                    type="checkbox"
+                    id="cb-ai-analysis"
+                    checked={includeAiAnalysis}
+                    onChange={(e) => setIncludeAiAnalysis(e.target.checked)}
+                    className="report-checkbox"
+                  />
+                  <div className="checkbox-text">
+                    <label htmlFor="cb-ai-analysis" className="checkbox-label">Análise por IA</label>
+                    <p className="checkbox-description">
+                      Análise psicopedagógica completa gerada por IA a partir do desempenho do aluno
+                      {includeAnamnese ? " e da anamnese" : ""} (a geração pode levar alguns segundos)
+                    </p>
+                  </div>
+                </li>
               </ul>
             </div>
 
@@ -522,7 +562,11 @@ function MainReport() {
                 
                 <div className="export-text-group">
                   <span className="export-main-text">
-                    {exportingPDF ? "Gerando PDF..." : "Exportar Relatório em PDF"}
+                    {exportingPDF
+                      ? includeAiAnalysis
+                        ? "Gerando análise por IA..."
+                        : "Gerando PDF..."
+                      : "Exportar Relatório em PDF"}
                   </span>
                   <span className="export-sub-text">Relatório de {selectedStudent.name}</span>
                 </div>

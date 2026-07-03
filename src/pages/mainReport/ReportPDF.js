@@ -144,7 +144,120 @@ const styles = StyleSheet.create({
     color: '#222222',
     fontFamily: 'Helvetica-Bold',
   },
+  aiBox: {
+    backgroundColor: '#F8FDFC',
+    borderRadius: 8,
+    padding: 14,
+    borderLeft: 3,
+    borderColor: '#63E9E2',
+  },
+  aiDisclaimer: {
+    fontSize: 8,
+    color: '#999999',
+    fontFamily: 'Helvetica-Oblique',
+    marginBottom: 8,
+  },
+  aiHeading: {
+    fontFamily: 'Helvetica-Bold',
+    fontSize: 12,
+    color: '#008D85',
+    marginTop: 10,
+    marginBottom: 4,
+  },
+  aiParagraph: {
+    fontSize: 10,
+    color: '#444444',
+    lineHeight: 1.5,
+    marginBottom: 6,
+  },
+  aiBulletRow: {
+    flexDirection: 'row',
+    marginBottom: 3,
+    paddingLeft: 6,
+  },
+  aiBulletDot: {
+    width: 12,
+    fontSize: 10,
+    color: '#008D85',
+  },
+  aiBulletText: {
+    flex: 1,
+    fontSize: 10,
+    color: '#444444',
+    lineHeight: 1.5,
+  },
+  aiBold: {
+    fontFamily: 'Helvetica-Bold',
+  },
 });
+
+// Renderiza texto com **negrito** inline como <Text> aninhados
+function InlineMarkdown({ text }) {
+  const parts = String(text).split('**');
+  return (
+    <>
+      {parts.map((part, i) =>
+        i % 2 === 1 ? (
+          <Text key={i} style={styles.aiBold}>{part}</Text>
+        ) : (
+          part
+        ),
+      )}
+    </>
+  );
+}
+
+// Converte o markdown da análise (títulos ##, listas e parágrafos) em blocos do PDF
+function AiAnalysisBlocks({ markdown }) {
+  const lines = String(markdown).split(/\r?\n/);
+  const blocks = [];
+  let paragraph = [];
+
+  const flushParagraph = (key) => {
+    if (paragraph.length === 0) return;
+    blocks.push(
+      <Text key={key} style={styles.aiParagraph}>
+        <InlineMarkdown text={paragraph.join(' ')} />
+      </Text>,
+    );
+    paragraph = [];
+  };
+
+  lines.forEach((rawLine, i) => {
+    const line = rawLine.trim();
+    if (!line) {
+      flushParagraph(`p-${i}`);
+      return;
+    }
+    const headingMatch = line.match(/^#{1,6}\s+(.*)$/);
+    if (headingMatch) {
+      flushParagraph(`p-${i}`);
+      blocks.push(
+        <Text key={`h-${i}`} style={styles.aiHeading}>
+          {headingMatch[1].replace(/\*\*/g, '')}
+        </Text>,
+      );
+      return;
+    }
+    const bulletMatch = line.match(/^[-*]\s+(.*)$/);
+    if (bulletMatch) {
+      flushParagraph(`p-${i}`);
+      blocks.push(
+        <View key={`b-${i}`} style={styles.aiBulletRow}>
+          <Text style={styles.aiBulletDot}>•</Text>
+          <Text style={styles.aiBulletText}>
+            <InlineMarkdown text={bulletMatch[1]} />
+          </Text>
+        </View>,
+      );
+      return;
+    }
+    paragraph.push(line);
+  });
+  flushParagraph('p-final');
+
+  return <>{blocks}</>;
+}
 
 function getAnswerText(question, response) {
   if (!response) return '—';
@@ -167,7 +280,7 @@ function getAnswerText(question, response) {
   return '—';
 }
 
-function ReportPDF({ student, analysisData, sessions, includeMetrics, includeObservations, includeAnamnese, anamneseData }) {
+function ReportPDF({ student, analysisData, sessions, includeMetrics, includeObservations, includeAnamnese, anamneseData, includeAiAnalysis, aiAnalysis }) {
   const categories = analysisData?.categories ?? {};
   const total = analysisData?.total ?? { total: 0, correct: 0, accuracy: 0 };
   const sessionsWithObs = (sessions ?? []).filter(s => s.observation);
@@ -221,6 +334,18 @@ function ReportPDF({ student, analysisData, sessions, includeMetrics, includeObs
                 </View>
               ))
             )}
+          </View>
+        )}
+
+        {includeAiAnalysis && aiAnalysis && (
+          <View>
+            <Text style={styles.sectionTitle}>Observações com IA</Text>
+            <View style={styles.aiBox}>
+              <Text style={styles.aiDisclaimer}>
+                Análise gerada por inteligência artificial a partir dos dados do aluno. Revise o conteúdo antes de utilizá-lo profissionalmente.
+              </Text>
+              <AiAnalysisBlocks markdown={aiAnalysis} />
+            </View>
           </View>
         )}
 
