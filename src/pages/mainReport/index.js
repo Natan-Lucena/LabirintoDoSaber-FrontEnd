@@ -250,7 +250,22 @@ function MainReport() {
             `${API_BASE_URL}/task-notebook-session/analysis/student/${selectedStudent.id}/ai`,
             { headers, params: aiParams },
           );
-          aiAnalysis = aiRes.data?.analysis || null;
+          // Contrato: { analysis: "<markdown>" }. Fallbacks defensivos para
+          // corpo em texto puro ou variações de nome de campo.
+          const aiBody = aiRes.data;
+          aiAnalysis =
+            (typeof aiBody === "string" && aiBody.trim()) ||
+            aiBody?.analysis ||
+            aiBody?.report ||
+            aiBody?.result ||
+            null;
+          if (!aiAnalysis) {
+            console.warn(
+              "Resposta de /ai sem o campo 'analysis'. Shape recebido:",
+              aiBody,
+            );
+            alert("A análise por IA retornou vazia. O PDF será exportado sem essa seção.");
+          }
         } catch (err) {
           console.error("Erro ao gerar análise por IA:", err);
           alert("Não foi possível gerar a análise por IA. O PDF será exportado sem essa seção.");
