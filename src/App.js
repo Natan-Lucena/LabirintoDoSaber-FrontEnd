@@ -8,7 +8,6 @@ import HomePage from "./pages/Home/index";
 import AlunosPage from "./pages/patients";
 import AlunosDetails from "./pages/patientsDetails";
 import CreateActivitiePage from "./pages/CreateNewActivitie";
-import ActivitiePersonalizePage from "./pages/NewActivitiePersonalize";
 import ActivitiesMain from "./pages/mainActivities/index.js";
 import AddNotebook from "./pages/addNotebook/index.js";
 import CreateTaskGroupPage from "./pages/createTaskGroup";
@@ -48,10 +47,6 @@ function App() {
         <Route path="/alunos" element={<AlunosPage />} />
         <Route path="/alunosDetails" element={<AlunosDetails />} />
         <Route path="/CreateNewActivitie" element={<CreateActivitiePage />} />
-        <Route
-          path="/NewActivitiePersonalize"
-          element={<ActivitiePersonalizePage />}
-        />
         <Route path="/activitiesMain" element={<ActivitiesMain />} />
         <Route path="/addNotebook" element={<AddNotebook />} />
         <Route path="/GroupActivities" element={<CreateTaskGroupPage />} />
