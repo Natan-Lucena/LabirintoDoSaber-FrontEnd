@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./style.css";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
@@ -10,6 +10,8 @@ import editIcon from "../../assets/images/editar-perfil-icon.png";
 import seta from "../../assets/images/back-button.png";
 import calendarIcon from "../../assets/images/blue-schedule-icon.png";
 import docIcon from "../../assets/images/relatorio-icon.png";
+import attachmentIcon from "../../assets/images/icon-documento.png";
+import uploadIcon from "../../assets/images/iconUpload.png";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -164,10 +166,13 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
 function AnalysisReportCard({ report, student, onDownload, downloading }) {
   const pct = Math.round((report.accuracy || 0) * 100);
   return (
-    <div className="doc-item">
+    <div className="doc-item doc-item-report">
       <img src={docIcon} alt="relatório" className="doc-icon-img" />
       <div className="doc-info">
-        <strong className="doc-title">Relatório Pedagógico</strong>
+        <div className="doc-title-row">
+          <strong className="doc-title">Relatório Pedagógico</strong>
+          <span className="doc-badge doc-badge-report">Gerado</span>
+        </div>
         <small className="doc-date">{formatDate(report.generatedAt)}</small>
       </div>
       <span className="doc-accuracy">{pct}% acertos • {report.totalQuestions || 0} questões</span>
@@ -179,6 +184,30 @@ function AnalysisReportCard({ report, student, onDownload, downloading }) {
       >
         {downloading ? "…" : "↓"}
       </button>
+    </div>
+  );
+}
+
+function AttachedDocumentCard({ doc }) {
+  return (
+    <div className="doc-item doc-item-attachment">
+      <img src={attachmentIcon} alt="documento anexado" className="doc-icon-img" />
+      <div className="doc-info">
+        <div className="doc-title-row">
+          <strong className="doc-title">{doc.name}</strong>
+          <span className="doc-badge doc-badge-attachment">Anexado</span>
+        </div>
+        <small className="doc-date">Anexado em {formatDateTime(doc.uploadedAt)}</small>
+      </div>
+      <a
+        href={doc.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="doc-download-btn"
+        title="Abrir documento"
+      >
+        ↓
+      </a>
     </div>
   );
 }
@@ -197,6 +226,8 @@ function AlunoDetalhe() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState(location.state?.openTab || "progresso");
   const [downloadingId, setDownloadingId] = useState(null);
+  const [uploadingDocument, setUploadingDocument] = useState(false);
+  const documentInputRef = useRef(null);
 
   const [anamneseLoading, setAnamneseLoading] = useState(false);
   const [anamneseTemplates, setAnamneseTemplates] = useState([]);
@@ -371,6 +402,44 @@ function AlunoDetalhe() {
     navigate("/MainReport", { state: { preSelectedStudentId: studentId } });
   };
 
+  const handleAttachDocumentClick = () => {
+    if (uploadingDocument) return;
+    documentInputRef.current?.click();
+  };
+
+  const handleDocumentFileChange = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+
+    setUploadingDocument(true);
+    try {
+      const token = localStorage.getItem("authToken");
+      const form = new FormData();
+      form.append("document", file);
+
+      const res = await axios.post(
+        `${API_BASE_URL}/student/${studentId}/documents`,
+        form,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setStudentDetails(res.data);
+    } catch (err) {
+      const errorMessages = {
+        FILE_REQUIRED: "Nenhum arquivo foi selecionado.",
+        "THIS FILE IS TO LARGE": "O arquivo excede o limite de 10 MB.",
+        STUDENT_NOT_ASSIGNED_TO_CURRENT_EDUCATOR: "Este aluno não pertence a você.",
+        STUDENT_NOT_FOUND: "Aluno não encontrado.",
+        EDUCATOR_NOT_FOUND: "Educador não encontrado.",
+      };
+      const serverMessage = err?.response?.data?.message;
+      alert(errorMessages[serverMessage] || "Não foi possível anexar o documento. Tente novamente.");
+    } finally {
+      setUploadingDocument(false);
+    }
+  };
+
   const handleTabChange = (tab) => {
     setActiveTab(tab);
     setCurrentSessionsPage(1);
@@ -411,7 +480,8 @@ function AlunoDetalhe() {
     );
   }
 
-  const { name, age, dateOfBirth, birthDate, gender, road, housenumber, learningTopics, photoUrl } = studentDetails;
+  const { name, age, dateOfBirth, birthDate, gender, road, housenumber, learningTopics, photoUrl, documents } = studentDetails;
+  const attachedDocuments = Array.isArray(documents) ? documents : [];
   const genderLabel = mapGender(gender);
   const educatorName = educatorDetails?.name || "Profissional responsável";
   const address = [road, housenumber].filter(Boolean).join(", ");
@@ -559,27 +629,59 @@ function AlunoDetalhe() {
           <div className="tab-content-card">
             <div className="doc-header">
               <h3 className="section-title">Documentos do Aluno</h3>
-              <button className="btn-adicionar-doc" onClick={handleGerarRelatorio}>
-                <img src={docIcon} alt="" className="btn-icon-sm" />
-                Gerar Relatório
-              </button>
+              <div className="doc-header-actions">
+                <button className="btn-adicionar-doc" onClick={handleGerarRelatorio}>
+                  <img src={docIcon} alt="" className="btn-icon-sm" />
+                  Gerar Relatório
+                </button>
+                <button
+                  className="btn-anexar-doc"
+                  onClick={handleAttachDocumentClick}
+                  disabled={uploadingDocument}
+                >
+                  <img src={uploadIcon} alt="" className="btn-icon-sm" />
+                  {uploadingDocument ? "Enviando..." : "Anexar Documento"}
+                </button>
+                <input
+                  type="file"
+                  ref={documentInputRef}
+                  onChange={handleDocumentFileChange}
+                  className="hidden-file-input"
+                />
+              </div>
             </div>
 
-            {analysisHistory.length === 0 ? (
-              <p className="empty-state">Nenhum relatório gerado ainda. Clique em "Gerar Relatório" para criar o primeiro.</p>
-            ) : (
-              <div className="doc-list">
-                {analysisHistory.map((report) => (
-                  <AnalysisReportCard
-                    key={report.id}
-                    report={report}
-                    student={studentDetails}
-                    onDownload={handleDownloadReport}
-                    downloading={downloadingId === report.id}
-                  />
-                ))}
-              </div>
-            )}
+            <section className="doc-subsection">
+              <h4 className="doc-subsection-title">Relatórios Gerados</h4>
+              {analysisHistory.length === 0 ? (
+                <p className="empty-state">Nenhum relatório gerado ainda. Clique em "Gerar Relatório" para criar o primeiro.</p>
+              ) : (
+                <div className="doc-list">
+                  {analysisHistory.map((report) => (
+                    <AnalysisReportCard
+                      key={report.id}
+                      report={report}
+                      student={studentDetails}
+                      onDownload={handleDownloadReport}
+                      downloading={downloadingId === report.id}
+                    />
+                  ))}
+                </div>
+              )}
+            </section>
+
+            <section className="doc-subsection">
+              <h4 className="doc-subsection-title">Documentos Anexados</h4>
+              {attachedDocuments.length === 0 ? (
+                <p className="empty-state">Nenhum documento anexado ainda. Clique em "Anexar Documento" para adicionar o primeiro.</p>
+              ) : (
+                <div className="doc-list">
+                  {attachedDocuments.map((doc) => (
+                    <AttachedDocumentCard key={doc.id} doc={doc} />
+                  ))}
+                </div>
+              )}
+            </section>
           </div>
         )}
 
